@@ -188,7 +188,7 @@ function CalculationsTable(props) {
               { onClick: function onClick() {
                   return props.handleClick(calculation.id);
                 } },
-              calculation.expression
+              calculation.evaluatedInput
             ),
             _react2.default.createElement(
               _core.TableCell,
@@ -322,7 +322,17 @@ var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+
+var _core = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/index.es.js");
+
+var _calculationsReducer = __webpack_require__(/*! ../reducers/calculationsReducer */ "./app/reducers/calculationsReducer.js");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -334,9 +344,38 @@ var NewCalculation = function (_Component) {
   _inherits(NewCalculation, _Component);
 
   function NewCalculation(props) {
+    var _this2 = this;
+
     _classCallCheck(this, NewCalculation);
 
     var _this = _possibleConstructorReturn(this, (NewCalculation.__proto__ || Object.getPrototypeOf(NewCalculation)).call(this, props));
+
+    _this.handleChange = function (evt) {
+      _this.setState(_defineProperty({}, evt.target.id, evt.target.value));
+    };
+
+    _this.handleEvaluation = function () {
+      var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(evt) {
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                evt.preventDefault();
+                _context.next = 3;
+                return _this.props.fetchEvaluation(_this.state.expression);
+
+              case 3:
+              case 'end':
+                return _context.stop();
+            }
+          }
+        }, _callee, _this2);
+      }));
+
+      return function (_x) {
+        return _ref.apply(this, arguments);
+      };
+    }();
 
     _this.state = { expression: '', label: '', result: '' };
     return _this;
@@ -351,10 +390,48 @@ var NewCalculation = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
+      var result = this.props.result;
+
       return _react2.default.createElement(
-        'h1',
+        _react2.default.Fragment,
         null,
-        'hi'
+        _react2.default.createElement(_core.TextField, {
+          margin: 'dense',
+          fullWidth: true,
+          required: true,
+          autoFocus: true,
+          id: 'label',
+          label: 'Calculation Label',
+          type: 'text',
+          value: this.state.label,
+          onChange: this.handleChange
+        }),
+        _react2.default.createElement(_core.TextField, {
+          margin: 'dense',
+          fullWidth: true,
+          required: true,
+          id: 'expression',
+          label: 'Expression',
+          type: 'text',
+          value: this.state.expression,
+          onChange: this.handleChange
+        }),
+        result !== '' && result !== undefined ? _react2.default.createElement(
+          _core.Typography,
+          null,
+          'Result: ',
+          result
+        ) : null,
+        _react2.default.createElement(
+          _core.Button,
+          { onClick: this.handleEvaluation, color: 'primary' },
+          'Evaluate!'
+        ),
+        _react2.default.createElement(
+          _core.Button,
+          { onClick: this.handleSubmit, color: 'primary' },
+          'Save!'
+        )
       );
     }
   }]);
@@ -362,7 +439,20 @@ var NewCalculation = function (_Component) {
   return NewCalculation;
 }(_react.Component);
 
-exports.default = NewCalculation;
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    result: state.calculations.currentResult
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    fetchEvaluation: function fetchEvaluation(expression) {
+      return dispatch((0, _calculationsReducer.fetchEvaluation)(expression));
+    }
+  };
+};
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(NewCalculation);
 
 /***/ }),
 
@@ -577,7 +667,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.updateCalculation = exports.deleteCalculation = exports.postNewCalculation = exports.fetchSingleCalculation = exports.fetchCalculations = undefined;
+exports.updateCalculation = exports.deleteCalculation = exports.postNewCalculation = exports.fetchEvaluation = exports.fetchCalculations = undefined;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -592,11 +682,15 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
 //action types
+
+//from database
 var GOT_CALCULATIONS_FROM_SERVER = 'GOT_CALCULATIONS_FROM_SERVER';
-var GOT_SINGLE_CALCULATION_FROM_SERVER = 'GOT_SINGLE_CALCULATION_FROM_SERVER';
 var GOT_NEW_CALCULATION_FROM_SERVER = 'GOT_NEW_CALCULATION_FROM_SERVER';
 var DELETED_CALCULATION_FROM_SERVER = 'DELETED_CALCULATION_FROM_SERVER';
 var GOT_UPDATED_CALCULATION_FROM_SERVER = 'GOT_UPDATED_CALCULATION_FROM_SERVER';
+
+//evaluating mathematical expressions
+var GOT_EVALUATION_FROM_SERVER = 'GOT_EVALUATION_FROM_SERVER';
 
 //action creators
 var gotCalculationsFromServer = function gotCalculationsFromServer(calculations) {
@@ -638,54 +732,36 @@ var fetchCalculations = exports.fetchCalculations = function fetchCalculations()
   }();
 };
 
-var gotSingleCalculationFromServer = function gotSingleCalculationFromServer(calculation) {
+var gotEvaluationFromServer = function gotEvaluationFromServer(result) {
   return {
-    type: GOT_SINGLE_CALCULATION_FROM_SERVER,
-    calculation: calculation
+    type: GOT_EVALUATION_FROM_SERVER,
+    result: result
   };
 };
-
 //thunk creator for action creator above
-var fetchSingleCalculation = exports.fetchSingleCalculation = function fetchSingleCalculation(calculationId, history) {
+var fetchEvaluation = exports.fetchEvaluation = function fetchEvaluation(expression) {
   return function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(dispatch) {
-      var res, calculation;
+      var res, result;
       return regeneratorRuntime.wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
-              _context2.prev = 0;
-              _context2.next = 3;
-              return _axios2.default.get('/api/calculations/' + calculationId);
+              _context2.next = 2;
+              return _axios2.default.get('/api/evaluate', { params: { expression: expression } });
 
-            case 3:
+            case 2:
               res = _context2.sent;
-              calculation = res.data;
+              result = res.data.result;
 
-              if (calculation.id) {
-                _context2.next = 7;
-                break;
-              }
+              dispatch(gotEvaluationFromServer(result));
 
-              throw new Error('calculation not found');
-
-            case 7:
-              dispatch(gotSingleCalculationFromServer(calculation));
-              _context2.next = 13;
-              break;
-
-            case 10:
-              _context2.prev = 10;
-              _context2.t0 = _context2['catch'](0);
-
-              history.push('/page-not-found/calculation/' + calculationId);
-
-            case 13:
+            case 5:
             case 'end':
               return _context2.stop();
           }
         }
-      }, _callee2, undefined, [[0, 10]]);
+      }, _callee2, undefined);
     }));
 
     return function (_x2) {
@@ -811,7 +887,8 @@ var updateCalculation = exports.updateCalculation = function updateCalculation(u
 //initial state
 var initialState = {
   calculations: [],
-  selectedCalculation: {}
+  selectedCalculation: {},
+  currentResult: ''
 };
 
 var calculationsReducer = function calculationsReducer() {
@@ -823,10 +900,11 @@ var calculationsReducer = function calculationsReducer() {
       return _extends({}, state, {
         calculations: action.calculations
       });
-    case GOT_SINGLE_CALCULATION_FROM_SERVER:
+    case GOT_EVALUATION_FROM_SERVER:
       return _extends({}, state, {
-        selectedCalculation: action.calculation
+        currentResult: action.result
       });
+
     case GOT_NEW_CALCULATION_FROM_SERVER:
       return _extends({}, state, {
         calculations: [].concat(_toConsumableArray(state.calculations), [action.calculation])
@@ -855,300 +933,6 @@ var calculationsReducer = function calculationsReducer() {
 };
 
 exports.default = calculationsReducer;
-
-/***/ }),
-
-/***/ "./app/reducers/campusesReducer.js":
-/*!*****************************************!*\
-  !*** ./app/reducers/campusesReducer.js ***!
-  \*****************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.updateCampus = exports.deleteCampus = exports.postNewCampus = exports.fetchSingleCampus = exports.fetchCampuses = undefined;
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-
-var _axios2 = _interopRequireDefault(_axios);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
-
-//action types
-var GOT_CAMPUSES_FROM_SERVER = 'GOT_CAMPUSES_FROM_SERVER';
-var GOT_SINGLE_CAMPUS_FROM_SERVER = 'GOT_SINGLE_CAMPUS_FROM_SERVER';
-var GOT_NEW_CAMPUS_FROM_SERVER = 'GOT_NEW_CAMPUS_FROM_SERVER';
-var DELETED_CAMPUS_FROM_SERVER = 'DELETED_CAMPUS_FROM_SERVER';
-var GOT_UPDATED_CAMPUS_FROM_SERVER = 'GOT_UPDATED_CAMPUS_FROM_SERVER';
-
-//action creators
-var gotCampusesFromServer = function gotCampusesFromServer(campuses) {
-  return {
-    type: GOT_CAMPUSES_FROM_SERVER,
-    campuses: campuses
-  };
-};
-
-//thunk creator for action creator above
-var fetchCampuses = exports.fetchCampuses = function fetchCampuses() {
-  return function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(dispatch) {
-      var res, campuses;
-      return regeneratorRuntime.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _context.next = 2;
-              return _axios2.default.get('/api/campuses');
-
-            case 2:
-              res = _context.sent;
-              campuses = res.data;
-
-              dispatch(gotCampusesFromServer(campuses));
-
-            case 5:
-            case 'end':
-              return _context.stop();
-          }
-        }
-      }, _callee, undefined);
-    }));
-
-    return function (_x) {
-      return _ref.apply(this, arguments);
-    };
-  }();
-};
-
-var gotSingleCampusFromServer = function gotSingleCampusFromServer(campus) {
-  return {
-    type: GOT_SINGLE_CAMPUS_FROM_SERVER,
-    campus: campus
-  };
-};
-
-//thunk creator for action creator above
-var fetchSingleCampus = exports.fetchSingleCampus = function fetchSingleCampus(campusId, history) {
-  return function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(dispatch) {
-      var res, campus;
-      return regeneratorRuntime.wrap(function _callee2$(_context2) {
-        while (1) {
-          switch (_context2.prev = _context2.next) {
-            case 0:
-              _context2.prev = 0;
-              _context2.next = 3;
-              return _axios2.default.get('/api/campuses/' + campusId);
-
-            case 3:
-              res = _context2.sent;
-              campus = res.data;
-
-              if (campus.id) {
-                _context2.next = 7;
-                break;
-              }
-
-              throw new Error('campus not found');
-
-            case 7:
-              dispatch(gotSingleCampusFromServer(campus));
-              _context2.next = 13;
-              break;
-
-            case 10:
-              _context2.prev = 10;
-              _context2.t0 = _context2['catch'](0);
-
-              history.push('/page-not-found/campus/' + campusId);
-
-            case 13:
-            case 'end':
-              return _context2.stop();
-          }
-        }
-      }, _callee2, undefined, [[0, 10]]);
-    }));
-
-    return function (_x2) {
-      return _ref2.apply(this, arguments);
-    };
-  }();
-};
-
-var gotNewCampusFromServer = function gotNewCampusFromServer(campus) {
-  return {
-    type: GOT_NEW_CAMPUS_FROM_SERVER,
-    campus: campus
-  };
-};
-//thunk creator for action creator above
-var postNewCampus = exports.postNewCampus = function postNewCampus(campus) {
-  return function () {
-    var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(dispatch) {
-      var res, campusFromServer;
-      return regeneratorRuntime.wrap(function _callee3$(_context3) {
-        while (1) {
-          switch (_context3.prev = _context3.next) {
-            case 0:
-              _context3.next = 2;
-              return _axios2.default.post('/api/campuses', campus);
-
-            case 2:
-              res = _context3.sent;
-              campusFromServer = res.data;
-
-              dispatch(gotNewCampusFromServer(campusFromServer));
-
-            case 5:
-            case 'end':
-              return _context3.stop();
-          }
-        }
-      }, _callee3, undefined);
-    }));
-
-    return function (_x3) {
-      return _ref3.apply(this, arguments);
-    };
-  }();
-};
-
-var deletedCampusFromServer = function deletedCampusFromServer(deletedCampus) {
-  return {
-    type: DELETED_CAMPUS_FROM_SERVER,
-    deletedCampus: deletedCampus
-  };
-};
-//thunk creator for action creator above
-var deleteCampus = exports.deleteCampus = function deleteCampus(campusId) {
-  return function () {
-    var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(dispatch) {
-      var res, deletedCampus;
-      return regeneratorRuntime.wrap(function _callee4$(_context4) {
-        while (1) {
-          switch (_context4.prev = _context4.next) {
-            case 0:
-              _context4.next = 2;
-              return _axios2.default.delete('/api/campuses/' + campusId);
-
-            case 2:
-              res = _context4.sent;
-              deletedCampus = res.data;
-
-              dispatch(deletedCampusFromServer(deletedCampus));
-
-            case 5:
-            case 'end':
-              return _context4.stop();
-          }
-        }
-      }, _callee4, undefined);
-    }));
-
-    return function (_x4) {
-      return _ref4.apply(this, arguments);
-    };
-  }();
-};
-
-var gotUpdatedCampusFromServer = function gotUpdatedCampusFromServer(updatedCampus) {
-  return {
-    type: GOT_UPDATED_CAMPUS_FROM_SERVER,
-    updatedCampus: updatedCampus
-  };
-};
-//thunk creator for action creator above
-var updateCampus = exports.updateCampus = function updateCampus(updatedInfo, campusId) {
-  return function () {
-    var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(dispatch) {
-      var res, updatedCampus;
-      return regeneratorRuntime.wrap(function _callee5$(_context5) {
-        while (1) {
-          switch (_context5.prev = _context5.next) {
-            case 0:
-              _context5.next = 2;
-              return _axios2.default.put('/api/campuses/' + campusId, updatedInfo);
-
-            case 2:
-              res = _context5.sent;
-              updatedCampus = res.data;
-
-              dispatch(gotUpdatedCampusFromServer(updatedCampus));
-
-            case 5:
-            case 'end':
-              return _context5.stop();
-          }
-        }
-      }, _callee5, undefined);
-    }));
-
-    return function (_x5) {
-      return _ref5.apply(this, arguments);
-    };
-  }();
-};
-
-//initial state
-var initialState = {
-  campuses: [],
-  selectedCampus: {}
-};
-
-var campusesReducer = function campusesReducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
-  var action = arguments[1];
-
-  switch (action.type) {
-    case GOT_CAMPUSES_FROM_SERVER:
-      return _extends({}, state, {
-        campuses: action.campuses
-      });
-    case GOT_SINGLE_CAMPUS_FROM_SERVER:
-      return _extends({}, state, {
-        selectedCampus: action.campus
-      });
-    case GOT_NEW_CAMPUS_FROM_SERVER:
-      return _extends({}, state, {
-        campuses: [].concat(_toConsumableArray(state.campuses), [action.campus])
-      });
-    case DELETED_CAMPUS_FROM_SERVER:
-      return _extends({}, state, {
-        campuses: state.campuses.filter(function (campus) {
-          return campus.id !== action.deletedCampus.id;
-        })
-      });
-    case GOT_UPDATED_CAMPUS_FROM_SERVER:
-      return _extends({}, state, {
-        campuses: state.campuses.map(function (campus) {
-          if (campus.id === action.updatedCampus.id) {
-            return action.updatedCampus;
-          } else {
-            return campus;
-          }
-        }),
-        selectedCampus: action.updatedCampus
-      });
-
-    default:
-      return state;
-  }
-};
-
-exports.default = campusesReducer;
 
 /***/ }),
 
@@ -1505,17 +1289,16 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Home = function (_Component) {
   _inherits(Home, _Component);
 
-  function Home() {
+  function Home(props) {
     _classCallCheck(this, Home);
 
-    return _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).call(this, props));
   }
 
   _createClass(Home, [{
     key: 'render',
     value: function render() {
-      var _props = props,
-          classes = _props.classes;
+      var classes = this.props.classes;
 
       return _react2.default.createElement(
         _react2.default.Fragment,
@@ -1556,7 +1339,7 @@ var Home = function (_Component) {
           { variant: 'h6', align: 'center', color: 'textSecondary', paragraph: true },
           'Click any of the past expressions to add it to your new expression'
         ),
-        _react2.default.createElement(_AllCalculations2.default, _extends({}, props, { home: true }))
+        _react2.default.createElement(_AllCalculations2.default, _extends({}, this.props, { home: true }))
       );
     }
   }]);
@@ -1569,232 +1352,6 @@ Home.propTypes = {
 };
 
 exports.default = (0, _core.withStyles)(_components.styles)(Home);
-
-/***/ }),
-
-/***/ "./app/screens/SingleCalculation.js":
-/*!******************************************!*\
-  !*** ./app/screens/SingleCalculation.js ***!
-  \******************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-
-var _campusesReducer = __webpack_require__(/*! ../reducers/campusesReducer */ "./app/reducers/campusesReducer.js");
-
-var _components = __webpack_require__(/*! ../components */ "./app/components/index.js");
-
-var _reactEmotion = __webpack_require__(/*! react-emotion */ "./node_modules/react-emotion/dist/index.esm.js");
-
-var _reactSpinners = __webpack_require__(/*! react-spinners */ "./node_modules/react-spinners/index.js");
-
-var _propTypes = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
-var _core = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/index.es.js");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var override = /*#__PURE__*/(0, _reactEmotion.css)('display:block;margin:0 auto;border-color:red;');
-
-var styles = function styles(theme) {
-  return {
-    cardGrid: {
-      padding: theme.spacing.unit * 8 + 'px 0'
-    },
-    card: {
-      minWidth: 500,
-      maxWidth: 800
-    },
-    cardMedia: {
-      paddingTop: '56.25%' // 16:9
-    },
-    cardContent: {
-      flexGrow: 1
-    }
-  };
-};
-
-var SingleCampus = function (_Component) {
-  _inherits(SingleCampus, _Component);
-
-  function SingleCampus(props) {
-    _classCallCheck(this, SingleCampus);
-
-    var _this = _possibleConstructorReturn(this, (SingleCampus.__proto__ || Object.getPrototypeOf(SingleCampus)).call(this, props));
-
-    _this.handleClick = _this.handleClick.bind(_this);
-    return _this;
-  }
-
-  _createClass(SingleCampus, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      this.props.fetchSingleCampus(this.props.match.params.campusId, this.props.history);
-    }
-  }, {
-    key: 'handleClick',
-    value: function handleClick(studentId) {
-      return this.props.history.push('/students/' + studentId);
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _props = this.props,
-          classes = _props.classes,
-          campus = _props.campus;
-
-      return _react2.default.createElement(
-        _react2.default.Fragment,
-        null,
-        !this.props.campus.name ? _react2.default.createElement(
-          _react2.default.Fragment,
-          null,
-          _react2.default.createElement(
-            'h3',
-            null,
-            'Loading Campus...'
-          ),
-          _react2.default.createElement(_reactSpinners.ClimbingBoxLoader, {
-            className: override,
-            sizeUnit: 'px',
-            size: 25,
-            color: 'green',
-            loading: true
-          })
-        ) : _react2.default.createElement(
-          _react2.default.Fragment,
-          null,
-          _react2.default.createElement(_components.CampusFormDialog, _extends({ type: 'Campus', action: 'Update' }, this.props)),
-          _react2.default.createElement(
-            _core.Grid,
-            { container: true, justify: 'center' },
-            _react2.default.createElement(
-              _core.Grid,
-              { item: true },
-              _react2.default.createElement(
-                _core.Card,
-                { className: classes.card, justify: 'center' },
-                _react2.default.createElement(
-                  _core.CardContent,
-                  { className: classes.cardContent },
-                  _react2.default.createElement(
-                    _core.Typography,
-                    {
-                      gutterBottom: true,
-                      variant: 'h5',
-                      component: 'h2',
-                      align: 'center'
-                    },
-                    campus.name
-                  ),
-                  _react2.default.createElement(_core.CardMedia, {
-                    className: classes.cardMedia,
-                    image: campus.imageUrl,
-                    title: campus.name + '-Image',
-                    align: 'center'
-                  }),
-                  _react2.default.createElement(
-                    _core.Typography,
-                    {
-                      gutterBottom: true,
-                      variant: 'h5',
-                      component: 'h3',
-                      align: 'left'
-                    },
-                    'Address: ',
-                    campus.address
-                  ),
-                  campus.description ? _react2.default.createElement(
-                    _react2.default.Fragment,
-                    null,
-                    _react2.default.createElement(
-                      _core.Typography,
-                      {
-                        gutterBottom: true,
-                        align: 'left',
-                        variant: 'h5',
-                        component: 'h3'
-                      },
-                      'Description:',
-                      ' '
-                    ),
-                    _react2.default.createElement(
-                      _core.Typography,
-                      { gutterBottom: true },
-                      campus.description
-                    )
-                  ) : null
-                )
-              )
-            )
-          ),
-          _react2.default.createElement(
-            _react2.default.Fragment,
-            null,
-            campus.students && campus.students.length ? _react2.default.createElement(_components.StudentsTable, {
-              students: this.props.campus.students,
-              includeCampus: false,
-              handleClick: this.handleClick
-            }) : _react2.default.createElement(
-              _core.Typography,
-              { variant: 'h6', align: 'center', color: 'textSecondary' },
-              'No Students Enrolled!'
-            )
-          )
-        )
-      );
-    }
-  }]);
-
-  return SingleCampus;
-}(_react.Component);
-
-var mapStateToProps = function mapStateToProps(state) {
-  return {
-    campus: state.campuses.selectedCampus
-  };
-};
-
-var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {
-    fetchSingleCampus: function fetchSingleCampus(campusId, history) {
-      return dispatch((0, _campusesReducer.fetchSingleCampus)(campusId, history));
-    },
-    putCampus: function putCampus(updatedCampus, campusId) {
-      return dispatch((0, _campusesReducer.updateCampus)(updatedCampus, campusId));
-    }
-  };
-};
-
-SingleCampus.propTypes = {
-  classes: _propTypes2.default.object.isRequired
-};
-
-exports.default = (0, _core.withStyles)(styles)((0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(SingleCampus));
 
 /***/ }),
 
@@ -1827,15 +1384,6 @@ Object.defineProperty(exports, 'AllCalculations', {
   enumerable: true,
   get: function get() {
     return _interopRequireDefault(_AllCalculations).default;
-  }
-});
-
-var _SingleCalculation = __webpack_require__(/*! ./SingleCalculation */ "./app/screens/SingleCalculation.js");
-
-Object.defineProperty(exports, 'SingleCalculation', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_SingleCalculation).default;
   }
 });
 

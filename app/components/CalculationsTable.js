@@ -48,7 +48,7 @@ function CalculationsTable(props) {
                     {calculation.label}
                   </TableCell>
                   <TableCell onClick={() => props.handleClick(calculation.id)}>
-                    {calculation.expression}
+                    {calculation.evaluatedInput}
                   </TableCell>
 
                   <TableCell onClick={() => props.handleClick(calculation.id)}>

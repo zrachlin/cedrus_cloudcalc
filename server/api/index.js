@@ -5,11 +5,12 @@ const router = require('express').Router();
 // NOTE: Any routes put here are ALREADY mounted on `/api`
 
 // Internal APIs:
-router.use('/students', require('./students'));
-router.use('/campuses', require('./campuses'));
+router.use('/calculations', require('./calculations'));
+router.use('/evaluate', require('./evaluate'));
+// router.use('/students', require('./students'));
+// router.use('/campuses', require('./campuses'));
 
 // External APIs:
-router.use('/externalAPI', require('./externalAPI'));
 
 // If someone makes a request that starts with `/api`,
 // but there is not a corresponding router, this piece of

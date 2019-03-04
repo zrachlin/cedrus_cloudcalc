@@ -9,7 +9,6 @@ const Calculation = require('./models/calculation');
 // Model Associations
 
 module.exports = {
-  // Include your models in this exports object as well!
   db,
   Calculation,
 };

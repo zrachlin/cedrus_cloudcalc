@@ -1,15 +1,8 @@
 import React from 'react';
 import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
-import { Navbar, NotFound, styles } from './components';
+import { Navbar, styles } from './components';
 
-import {
-  Home,
-  AllStudents,
-  AllCampuses,
-  SingleCampus,
-  SingleStudent,
-  AllCalculations,
-} from './screens';
+import { Home, AllCalculations } from './screens';
 
 import PropTypes from 'prop-types';
 
@@ -27,15 +20,7 @@ const Routes = props => {
             path="/calculations"
             render={renderProps => <AllCalculations {...renderProps} />}
           />
-          {/*
-          <Route path="/students/:studentId" component={SingleStudent} />
-          <Route path="/campuses" component={AllCampuses} />
-          <Route
-            path="/students"
-            render={renderProps => <AllStudents {...renderProps} />}
-          /> */}
           <Route path="/home" component={Home} />
-          {/* <Route path="/page-not-found/:type/:id" component={NotFound} /> */}
           <Redirect to="/home" />
         </Switch>
       </main>

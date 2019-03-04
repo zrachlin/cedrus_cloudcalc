@@ -1,12 +1,16 @@
 import axios from 'axios';
 
 //action types
+
+//from database
 const GOT_CALCULATIONS_FROM_SERVER = 'GOT_CALCULATIONS_FROM_SERVER';
-const GOT_SINGLE_CALCULATION_FROM_SERVER = 'GOT_SINGLE_CALCULATION_FROM_SERVER';
 const GOT_NEW_CALCULATION_FROM_SERVER = 'GOT_NEW_CALCULATION_FROM_SERVER';
 const DELETED_CALCULATION_FROM_SERVER = 'DELETED_CALCULATION_FROM_SERVER';
 const GOT_UPDATED_CALCULATION_FROM_SERVER =
   'GOT_UPDATED_CALCULATION_FROM_SERVER';
+
+//evaluating mathematical expressions
+const GOT_EVALUATION_FROM_SERVER = 'GOT_EVALUATION_FROM_SERVER';
 
 //action creators
 const gotCalculationsFromServer = calculations => {
@@ -23,28 +27,17 @@ export const fetchCalculations = () => async dispatch => {
   dispatch(gotCalculationsFromServer(calculations));
 };
 
-const gotSingleCalculationFromServer = calculation => {
+const gotEvaluationFromServer = result => {
   return {
-    type: GOT_SINGLE_CALCULATION_FROM_SERVER,
-    calculation,
+    type: GOT_EVALUATION_FROM_SERVER,
+    result,
   };
 };
-
 //thunk creator for action creator above
-export const fetchSingleCalculation = (
-  calculationId,
-  history
-) => async dispatch => {
-  try {
-    const res = await axios.get(`/api/calculations/${calculationId}`);
-    const calculation = res.data;
-    if (!calculation.id) {
-      throw new Error('calculation not found');
-    }
-    dispatch(gotSingleCalculationFromServer(calculation));
-  } catch (err) {
-    history.push(`/page-not-found/calculation/${calculationId}`);
-  }
+export const fetchEvaluation = expression => async dispatch => {
+  const res = await axios.get('/api/evaluate', { params: { expression } });
+  const { result } = res.data;
+  dispatch(gotEvaluationFromServer(result));
 };
 
 const gotNewCalculationFromServer = calculation => {
@@ -96,6 +89,7 @@ export const updateCalculation = (
 const initialState = {
   calculations: [],
   selectedCalculation: {},
+  currentResult: '',
 };
 
 const calculationsReducer = (state = initialState, action) => {
@@ -105,11 +99,12 @@ const calculationsReducer = (state = initialState, action) => {
         ...state,
         calculations: action.calculations,
       };
-    case GOT_SINGLE_CALCULATION_FROM_SERVER:
+    case GOT_EVALUATION_FROM_SERVER:
       return {
         ...state,
-        selectedCalculation: action.calculation,
+        currentResult: action.result,
       };
+
     case GOT_NEW_CALCULATION_FROM_SERVER:
       return {
         ...state,
