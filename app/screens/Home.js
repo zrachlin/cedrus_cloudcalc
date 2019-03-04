@@ -12,8 +12,11 @@ import {
 } from '@material-ui/core';
 
 class Home extends Component {
+  constructor(props) {
+    super(props);
+  }
   render() {
-    const { classes } = props;
+    const { classes } = this.props;
     return (
       <React.Fragment>
         <CssBaseline />
@@ -58,7 +61,7 @@ class Home extends Component {
         <Typography variant="h6" align="center" color="textSecondary" paragraph>
           Click any of the past expressions to add it to your new expression
         </Typography>
-        <AllCalculations {...props} home={true} />
+        <AllCalculations {...this.props} home={true} />
       </React.Fragment>
     );
   }

@@ -22,7 +22,7 @@ const calculations = [
     result: 7,
   },
   {
-    name: 'Multiply1',
+    label: 'Multiply1',
     rawInput: '12-(Add1)*(Subtract1)',
     evaluatedInput: '12-(7)*(4)',
     result: -16,
