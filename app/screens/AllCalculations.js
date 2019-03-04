@@ -1,36 +1,45 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import {
-  fetchStudents,
-  deleteStudent,
-  postNewStudent,
-} from '../reducers/studentsReducer';
-import { fetchCampuses } from '../reducers/campusesReducer';
-import { StudentsTable, StudentFormDialog, styles } from '../components';
+// import { connect } from 'react-redux';
+import axios from 'axios';
+// import {
+//   fetchStudents,
+//   deleteStudent,
+//   postNewStudent,
+// } from '../reducers/studentsReducer';
+// import { fetchCampuses } from '../reducers/campusesReducer';
+import { CalculationsTable, styles } from '../components';
 
 import { css } from 'react-emotion';
 import { PacmanLoader } from 'react-spinners';
 import { Typography, withStyles } from '@material-ui/core';
+
 const override = css`
   display: block;
   margin: 0 auto;
   border-color: red;
 `;
-class AllStudents extends Component {
+class AllCalculations extends Component {
   constructor(props) {
     super(props);
-    this.handleClick = this.handleClick.bind(this);
+    this.state = { calculations: [] };
   }
 
-  componentDidMount() {
-    this.props.fetchStudents();
+  async componentDidMount() {
+    try {
+      const { data } = await axios.get('/api/calculations');
+      this.setState({ calculations: data });
+    } catch (error) {
+      console.error(error);
+    }
   }
 
-  handleClick(studentId) {
-    return this.props.history.push(`/students/${studentId}`);
-  }
+  handleClick = evt => {
+    // return this.props.history.push(`/students/${studentId}`);
+    console.log('clicked', evt);
+  };
 
   render() {
+    const { calculations } = this.state;
     return (
       <React.Fragment>
         <Typography
@@ -39,11 +48,11 @@ class AllStudents extends Component {
           align="center"
           color="textPrimary"
         >
-          Students
+          Calculations
         </Typography>
-        {!this.props.students.length ? (
+        {!calculations.length ? (
           <React.Fragment>
-            <h3>Loading Students... nom,nom,nom</h3>
+            <h3>Loading Past Calculations... nom,nom,nom</h3>
             <PacmanLoader
               className={override}
               sizeUnit="px"
@@ -54,11 +63,9 @@ class AllStudents extends Component {
           </React.Fragment>
         ) : (
           <React.Fragment>
-            <StudentFormDialog action="Create" type="Student" {...this.props} />
-            <StudentsTable
-              students={this.props.students}
-              includeCampus={true}
-              deleteStudent={this.props.deleteStudent}
+            {/* <StudentFormDialog action="Create" type="Student" {...this.props} /> */}
+            <CalculationsTable
+              calculations={calculations}
               handleClick={this.handleClick}
             />
           </React.Fragment>
@@ -68,25 +75,20 @@ class AllStudents extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    students: state.students.students,
-    campuses: state.campuses.campuses,
-  };
-};
+// const mapStateToProps = state => {
+//   return {
+//     students: state.students.students,
+//     campuses: state.campuses.campuses,
+//   };
+// };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    fetchStudents: () => dispatch(fetchStudents()),
-    fetchCampuses: () => dispatch(fetchCampuses()),
-    deleteStudent: studentId => dispatch(deleteStudent(studentId)),
-    postStudent: newStudent => dispatch(postNewStudent(newStudent)),
-  };
-};
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     fetchStudents: () => dispatch(fetchStudents()),
+//     fetchCampuses: () => dispatch(fetchCampuses()),
+//     deleteStudent: studentId => dispatch(deleteStudent(studentId)),
+//     postStudent: newStudent => dispatch(postNewStudent(newStudent)),
+//   };
+// };
 
-export default withStyles(styles)(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(AllStudents)
-);
+export default withStyles(styles)(AllCalculations);

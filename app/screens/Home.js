@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { styles } from '../components';
-import { AllCalculations } from './AllCampuses';
+import { styles, NewCalculation } from '../components';
+import AllCalculations from './AllCalculations';
 import {
   Typography,
   CssBaseline,
@@ -11,32 +11,34 @@ import {
   withStyles,
 } from '@material-ui/core';
 
-const Home = props => {
-  const { classes } = props;
-  return (
-    <React.Fragment>
-      <CssBaseline />
-      {/* {Hero Unit} */}
-      <div className={classes.heroUnit}>
-        <div className={classes.heroContent}>
-          <Typography
-            component="h1"
-            variant="h2"
-            align="center"
-            color="textPrimary"
-            gutterBottom
-          >
-            Welcome to CloudCalc!
-          </Typography>
-          <Typography
-            variant="h6"
-            align="center"
-            color="textSecondary"
-            paragraph
-          >
-            Enter a new calculation below!
-          </Typography>
-          <div className={classes.heroButtons}>
+class Home extends Component {
+  render() {
+    const { classes } = props;
+    return (
+      <React.Fragment>
+        <CssBaseline />
+        {/* {Hero Unit} */}
+        <div className={classes.heroUnit}>
+          <div className={classes.heroContent}>
+            <Typography
+              component="h1"
+              variant="h2"
+              align="center"
+              color="textPrimary"
+              gutterBottom
+            >
+              Welcome to CloudCalc!
+            </Typography>
+            <Typography
+              variant="h6"
+              align="center"
+              color="textSecondary"
+              paragraph
+            >
+              Enter a new expression below:
+            </Typography>
+            <NewCalculation />
+            {/* <div className={classes.heroButtons}>
             <Grid container spacing={16} justify="center">
               <Grid item>
                 <Button
@@ -49,15 +51,18 @@ const Home = props => {
                 </Button>
               </Grid>
             </Grid>
+          </div> */}
           </div>
         </div>
-      </div>
-      {/* {End of Hero} */}
-
-      <AllCalculations {...props} home={true} />
-    </React.Fragment>
-  );
-};
+        {/* {End of Hero} */}
+        <Typography variant="h6" align="center" color="textSecondary" paragraph>
+          Click any of the past expressions to add it to your new expression
+        </Typography>
+        <AllCalculations {...props} home={true} />
+      </React.Fragment>
+    );
+  }
+}
 
 Home.propTypes = {
   classes: PropTypes.object.isRequired,

@@ -8,6 +8,7 @@ import {
   AllCampuses,
   SingleCampus,
   SingleStudent,
+  AllCalculations,
 } from './screens';
 
 import PropTypes from 'prop-types';
@@ -22,10 +23,11 @@ const Routes = props => {
       <Navbar />
       <main>
         <Switch>
-          {/* <Route
-            path="/campuses/:campusId"
-            render={renderProps => <SingleCampus {...renderProps} />}
+          <Route
+            path="/calculations"
+            render={renderProps => <AllCalculations {...renderProps} />}
           />
+          {/*
           <Route path="/students/:studentId" component={SingleStudent} />
           <Route path="/campuses" component={AllCampuses} />
           <Route

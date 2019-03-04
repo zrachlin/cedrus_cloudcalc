@@ -17,15 +17,17 @@ const Navbar = props => {
         >
           Home
         </Button>
-        {/* <Button
-          component={Link}
-          to="/campuses"
-          disabled={props.location.pathname === '/campuses'}
-          variant={props.location.pathname === '/campuses' ? 'outlined' : null}
-        >
-          Campuses
-        </Button>
         <Button
+          component={Link}
+          to="/calculations"
+          disabled={props.location.pathname === '/calculations'}
+          variant={
+            props.location.pathname === '/calculations' ? 'outlined' : null
+          }
+        >
+          All Calculations
+        </Button>
+        {/* <Button
           component={Link}
           to="/students"
           disabled={props.location.pathname === '/students'}

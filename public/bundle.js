@@ -86,10 +86,10 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./app/components/CampusFormDialog.js":
-/*!********************************************!*\
-  !*** ./app/components/CampusFormDialog.js ***!
-  \********************************************/
+/***/ "./app/components/CalculationsTable.js":
+/*!*********************************************!*\
+  !*** ./app/components/CalculationsTable.js ***!
+  \*********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -100,8 +100,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
 var _react2 = _interopRequireDefault(_react);
@@ -110,270 +108,124 @@ var _propTypes = __webpack_require__(/*! prop-types */ "./node_modules/prop-type
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _styles = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/styles/index.js");
-
 var _core = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/index.es.js");
 
-var _Add = __webpack_require__(/*! @material-ui/icons/Add */ "./node_modules/@material-ui/icons/Add.js");
+var _Delete = __webpack_require__(/*! @material-ui/icons/Delete */ "./node_modules/@material-ui/icons/Delete.js");
 
-var _Add2 = _interopRequireDefault(_Add);
+var _Delete2 = _interopRequireDefault(_Delete);
 
-var _styles2 = __webpack_require__(/*! ./styles */ "./app/components/styles.js");
+var _styles = __webpack_require__(/*! ./styles */ "./app/components/styles.js");
 
-var _styles3 = _interopRequireDefault(_styles2);
+var _styles2 = _interopRequireDefault(_styles);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+function CalculationsTable(props) {
+  var classes = props.classes;
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var CampusFormDialog = function (_Component) {
-  _inherits(CampusFormDialog, _Component);
-
-  function CampusFormDialog(props) {
-    _classCallCheck(this, CampusFormDialog);
-
-    var _this = _possibleConstructorReturn(this, (CampusFormDialog.__proto__ || Object.getPrototypeOf(CampusFormDialog)).call(this, props));
-
-    _this.handleChange = function (name) {
-      return function (evt) {
-        _this.setState(_defineProperty({}, name, evt.target.value));
-      };
-    };
-
-    _this.state = {
-      open: false,
-      name: '',
-      address: '',
-      description: '',
-      imageUrl: ''
-    };
-    _this.handleClickOpen = _this.handleClickOpen.bind(_this);
-    _this.handleChange = _this.handleChange.bind(_this);
-    _this.handleSubmit = _this.handleSubmit.bind(_this);
-    _this.handleClose = _this.handleClose.bind(_this);
-    return _this;
-  }
-
-  _createClass(CampusFormDialog, [{
-    key: 'handleClickOpen',
-    value: function handleClickOpen() {
-      this.setState({ open: true });
-    }
-  }, {
-    key: 'handleClose',
-    value: function handleClose() {
-      this.setState({ open: false });
-    }
-  }, {
-    key: 'handleSubmit',
-
-    // eslint-disable-next-line complexity
-    value: function () {
-      var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(evt) {
-        var action, _state, name, address, description, imageUrl, campusObj;
-
-        return regeneratorRuntime.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                evt.preventDefault();
-                action = this.props.action;
-                _state = this.state, name = _state.name, address = _state.address, description = _state.description, imageUrl = _state.imageUrl;
-                campusObj = Object.assign({}, name ? { name: name } : null, address ? { address: address } : null, description ? { description: description } : null, imageUrl ? { imageUrl: imageUrl } : null);
-                _context.prev = 4;
-
-                if (!Object.keys(campusObj).length) {
-                  _context.next = 14;
-                  break;
-                }
-
-                if (!(action === 'Create')) {
-                  _context.next = 11;
-                  break;
-                }
-
-                _context.next = 9;
-                return this.props.postCampus(campusObj);
-
-              case 9:
-                _context.next = 13;
-                break;
-
-              case 11:
-                _context.next = 13;
-                return this.props.putCampus(campusObj, this.props.campus.id);
-
-              case 13:
-                this.setState({
-                  name: '',
-                  address: '',
-                  description: '',
-                  imageUrl: '',
-                  open: false
-                });
-
-              case 14:
-                _context.next = 19;
-                break;
-
-              case 16:
-                _context.prev = 16;
-                _context.t0 = _context['catch'](4);
-
-                alert(_context.t0.response.data);
-
-              case 19:
-              case 'end':
-                return _context.stop();
-            }
-          }
-        }, _callee, this, [[4, 16]]);
-      }));
-
-      function handleSubmit(_x) {
-        return _ref.apply(this, arguments);
-      }
-
-      return handleSubmit;
-    }()
-  }, {
-    key: 'render',
-    value: function render() {
-      var _props = this.props,
-          classes = _props.classes,
-          action = _props.action,
-          type = _props.type;
-
-      return _react2.default.createElement(
-        _react2.default.Fragment,
+  return _react2.default.createElement(
+    _core.Paper,
+    { className: classes.root },
+    _react2.default.createElement(
+      _core.Toolbar,
+      null,
+      _react2.default.createElement(
+        _core.Typography,
+        { variant: 'h6', id: 'tableTitle' },
+        'Calculations'
+      )
+    ),
+    _react2.default.createElement(
+      _core.Table,
+      { className: classes.table, justify: 'center' },
+      _react2.default.createElement(
+        _core.TableHead,
         null,
-        action === 'Create' ? _react2.default.createElement(
-          _core.Fab,
-          {
-            className: classes.fab,
-            variant: 'extended',
-            color: 'primary',
-            onClick: this.handleClickOpen
-          },
-          _react2.default.createElement(_Add2.default, null),
-          'New ',
-          type
-        ) : _react2.default.createElement(
-          _core.Fab,
-          {
-            className: classes.fab,
-            variant: 'extended',
-            color: 'primary',
-            onClick: this.handleClickOpen
-          },
-          'Update ',
-          type
-        ),
         _react2.default.createElement(
-          _core.Dialog,
-          {
-            open: this.state.open,
-            onClose: this.handleClose,
-            'aria-labelledby': 'form-dialog-title'
-          },
+          _core.TableRow,
+          null,
           _react2.default.createElement(
-            _core.DialogTitle,
-            { id: 'form-dialog-title' },
-            action,
-            ' ',
-            type
+            _core.TableCell,
+            null,
+            'Label'
           ),
           _react2.default.createElement(
-            _core.DialogContent,
+            _core.TableCell,
             null,
-            _react2.default.createElement(
-              _core.DialogContentText,
-              null,
-              'Please fill in the following fields to ',
-              action.toLowerCase(),
-              ' the',
-              ' ',
-              type.toLowerCase(),
-              '.'
-            ),
-            _react2.default.createElement(_core.TextField, {
-              required: action === 'Create' ? true : null,
-              autoFocus: true,
-              margin: 'dense',
-              id: 'name',
-              label: 'Campus Name',
-              type: 'text',
-              value: this.state.name,
-              fullWidth: true,
-              onChange: this.handleChange('name')
-            }),
-            _react2.default.createElement(_core.TextField, {
-              required: action === 'Create' ? true : null,
-              margin: 'dense',
-              id: 'address',
-              label: 'Campus Address',
-              type: 'address',
-              value: this.state.address,
-              fullWidth: true,
-              onChange: this.handleChange('address')
-            }),
-            _react2.default.createElement(_core.TextField, {
-              multiline: true,
-              rowsMax: '10',
-              margin: 'dense',
-              id: 'description',
-              label: 'Campus Description',
-              type: 'text',
-              value: this.state.description,
-              fullWidth: true,
-              onChange: this.handleChange('description')
-            }),
-            _react2.default.createElement(_core.TextField, {
-              margin: 'dense',
-              id: 'imageUrl',
-              label: 'Campus Image URL (Leave blank for default image)',
-              type: 'url',
-              value: this.state.imageUrl,
-              fullWidth: true,
-              onChange: this.handleChange('imageUrl')
-            })
+            'Expression'
           ),
           _react2.default.createElement(
-            _core.DialogActions,
+            _core.TableCell,
             null,
-            _react2.default.createElement(
-              _core.Button,
-              { onClick: this.handleClose, color: 'primary' },
-              'Cancel'
-            ),
-            _react2.default.createElement(
-              _core.Button,
-              { onClick: this.handleSubmit, color: 'primary' },
-              action,
-              '!'
-            )
-          )
+            'Result'
+          ),
+          _react2.default.createElement(_core.TableCell, null)
         )
-      );
-    }
-  }]);
+      ),
+      _react2.default.createElement(
+        _core.TableBody,
+        null,
+        props.calculations.sort(function (a, b) {
+          return a.id - b.id;
+        }).map(function (calculation) {
+          return _react2.default.createElement(
+            _core.TableRow,
+            { key: calculation.id, hover: true },
+            _react2.default.createElement(
+              _core.TableCell,
+              {
+                component: 'th',
+                scope: 'row',
+                onClick: function onClick() {
+                  return props.handleClick(calculation.id);
+                }
+              },
+              calculation.label
+            ),
+            _react2.default.createElement(
+              _core.TableCell,
+              { onClick: function onClick() {
+                  return props.handleClick(calculation.id);
+                } },
+              calculation.expression
+            ),
+            _react2.default.createElement(
+              _core.TableCell,
+              { onClick: function onClick() {
+                  return props.handleClick(calculation.id);
+                } },
+              calculation.result
+            ),
+            _react2.default.createElement(
+              _core.TableCell,
+              null,
+              _react2.default.createElement(
+                _core.Button,
+                {
+                  variant: 'contained',
+                  color: 'secondary',
+                  className: classes.button,
+                  onClick: function onClick() {
+                    return props.deleteCalculation(calculation.id);
+                  }
+                },
+                'Delete',
+                _react2.default.createElement(_Delete2.default, { className: classes.rightIcon })
+              )
+            )
+          );
+        })
+      )
+    )
+  );
+}
 
-  return CampusFormDialog;
-}(_react.Component);
-
-CampusFormDialog.propTypes = {
+CalculationsTable.propTypes = {
   classes: _propTypes2.default.object.isRequired
 };
 
-exports.default = (0, _styles.withStyles)(_styles3.default)(CampusFormDialog);
+exports.default = (0, _core.withStyles)(_styles2.default)(CalculationsTable);
 
 /***/ }),
 
@@ -432,21 +284,11 @@ var Navbar = function Navbar(props) {
         _core.Button,
         {
           component: _reactRouterDom.Link,
-          to: '/campuses',
-          disabled: props.location.pathname === '/campuses',
-          variant: props.location.pathname === '/campuses' ? 'outlined' : null
+          to: '/calculations',
+          disabled: props.location.pathname === '/calculations',
+          variant: props.location.pathname === '/calculations' ? 'outlined' : null
         },
-        'Campuses'
-      ),
-      _react2.default.createElement(
-        _core.Button,
-        {
-          component: _reactRouterDom.Link,
-          to: '/students',
-          disabled: props.location.pathname === '/students',
-          variant: props.location.pathname === '/students' ? 'outlined' : null
-        },
-        'Students'
+        'All Calculations'
       )
     )
   );
@@ -460,47 +302,10 @@ exports.default = (0, _core.withStyles)(_styles2.default)((0, _reactRouterDom.wi
 
 /***/ }),
 
-/***/ "./app/components/NotFound.js":
-/*!************************************!*\
-  !*** ./app/components/NotFound.js ***!
-  \************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var NotFound = function NotFound(props) {
-  var _props$match$params = props.match.params,
-      type = _props$match$params.type,
-      id = _props$match$params.id;
-
-  var typeStr = type[0].toUpperCase() + type.slice(1);
-  return _react2.default.createElement(
-    'h1',
-    null,
-    'Couldn\'t find ' + typeStr + ' with ID "' + id + '" -> Please verify that you have the correct ' + typeStr + ' ID!'
-  );
-};
-
-exports.default = NotFound;
-
-/***/ }),
-
-/***/ "./app/components/StudentFormDialog.js":
-/*!*********************************************!*\
-  !*** ./app/components/StudentFormDialog.js ***!
-  \*********************************************/
+/***/ "./app/components/NewCalculation.js":
+/*!******************************************!*\
+  !*** ./app/components/NewCalculation.js ***!
+  \******************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -517,27 +322,7 @@ var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
-var _styles = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/styles/index.js");
-
-var _core = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/index.es.js");
-
-var _Add = __webpack_require__(/*! @material-ui/icons/Add */ "./node_modules/@material-ui/icons/Add.js");
-
-var _Add2 = _interopRequireDefault(_Add);
-
-var _styles2 = __webpack_require__(/*! ./styles */ "./app/components/styles.js");
-
-var _styles3 = _interopRequireDefault(_styles2);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -545,452 +330,39 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var StudentFormDialog = function (_Component) {
-  _inherits(StudentFormDialog, _Component);
+var NewCalculation = function (_Component) {
+  _inherits(NewCalculation, _Component);
 
-  function StudentFormDialog(props) {
-    _classCallCheck(this, StudentFormDialog);
+  function NewCalculation(props) {
+    _classCallCheck(this, NewCalculation);
 
-    var _this = _possibleConstructorReturn(this, (StudentFormDialog.__proto__ || Object.getPrototypeOf(StudentFormDialog)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (NewCalculation.__proto__ || Object.getPrototypeOf(NewCalculation)).call(this, props));
 
-    _this.handleChange = function (name) {
-      return function (evt) {
-        var val = name === 'campusId' ? Number(evt.target.value) : evt.target.value;
-        _this.setState(_defineProperty({}, name, val));
-      };
-    };
-
-    _this.state = {
-      open: false,
-      firstName: '',
-      lastName: '',
-      email: '',
-      imageUrl: '',
-      gpa: '',
-      campusId: ''
-    };
-    _this.handleClickOpen = _this.handleClickOpen.bind(_this);
-    _this.handleChange = _this.handleChange.bind(_this);
-    _this.handleSubmit = _this.handleSubmit.bind(_this);
-    _this.handleClose = _this.handleClose.bind(_this);
+    _this.state = { expression: '', label: '', result: '' };
     return _this;
   }
 
-  _createClass(StudentFormDialog, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      this.props.fetchCampuses();
+  _createClass(NewCalculation, [{
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate(prevProps) {
+      var oldSelectedExpression = prevProps.selectedExpression;
+      var selectedExpression = this.props.selectedExpression;
     }
-  }, {
-    key: 'handleClickOpen',
-    value: function handleClickOpen() {
-      this.setState({ open: true });
-    }
-  }, {
-    key: 'handleClose',
-    value: function handleClose() {
-      this.setState({ open: false });
-    }
-  }, {
-    key: 'handleSubmit',
-
-    // eslint-disable-next-line complexity
-    value: function () {
-      var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(evt) {
-        var action, _state, firstName, lastName, email, imageUrl, gpa, campusId, studentObj;
-
-        return regeneratorRuntime.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                evt.preventDefault();
-                action = this.props.action;
-                _state = this.state, firstName = _state.firstName, lastName = _state.lastName, email = _state.email, imageUrl = _state.imageUrl, gpa = _state.gpa, campusId = _state.campusId;
-                studentObj = Object.assign({}, firstName ? { firstName: firstName } : null, lastName ? { lastName: lastName } : null, email ? { email: email } : null, imageUrl ? { imageUrl: imageUrl } : null, gpa ? { gpa: gpa } : null, campusId ? { campusId: campusId } : null);
-                _context.prev = 4;
-
-                if (!Object.keys(studentObj).length) {
-                  _context.next = 14;
-                  break;
-                }
-
-                if (!(action === 'Create')) {
-                  _context.next = 11;
-                  break;
-                }
-
-                _context.next = 9;
-                return this.props.postStudent(studentObj);
-
-              case 9:
-                _context.next = 13;
-                break;
-
-              case 11:
-                _context.next = 13;
-                return this.props.putStudent(studentObj, this.props.student.id);
-
-              case 13:
-                this.setState({
-                  firstName: '',
-                  lastName: '',
-                  email: '',
-                  imageUrl: '',
-                  gpa: '',
-                  campusId: 'Select a Campus',
-                  open: false
-                });
-
-              case 14:
-                _context.next = 19;
-                break;
-
-              case 16:
-                _context.prev = 16;
-                _context.t0 = _context['catch'](4);
-
-                alert(_context.t0.response.data);
-
-              case 19:
-              case 'end':
-                return _context.stop();
-            }
-          }
-        }, _callee, this, [[4, 16]]);
-      }));
-
-      function handleSubmit(_x) {
-        return _ref.apply(this, arguments);
-      }
-
-      return handleSubmit;
-    }()
   }, {
     key: 'render',
     value: function render() {
-      var _props = this.props,
-          classes = _props.classes,
-          action = _props.action,
-          type = _props.type;
-
       return _react2.default.createElement(
-        _react2.default.Fragment,
+        'h1',
         null,
-        action === 'Create' ? _react2.default.createElement(
-          _core.Fab,
-          {
-            className: classes.fab,
-            variant: 'extended',
-            color: 'primary',
-            onClick: this.handleClickOpen
-          },
-          _react2.default.createElement(_Add2.default, null),
-          'New ',
-          type
-        ) : _react2.default.createElement(
-          _core.Fab,
-          {
-            className: classes.fab,
-            variant: 'extended',
-            color: 'primary',
-            onClick: this.handleClickOpen
-          },
-          'Update ',
-          type
-        ),
-        _react2.default.createElement(
-          _core.Dialog,
-          {
-            open: this.state.open,
-            onClose: this.handleClose,
-            'aria-labelledby': 'form-dialog-title'
-          },
-          _react2.default.createElement(
-            _core.DialogTitle,
-            { id: 'form-dialog-title' },
-            action,
-            ' ',
-            type
-          ),
-          _react2.default.createElement(
-            _core.DialogContent,
-            null,
-            _react2.default.createElement(
-              _core.DialogContentText,
-              null,
-              'Please fill in the following fields to ',
-              action.toLowerCase(),
-              ' the',
-              ' ',
-              type.toLowerCase(),
-              '.'
-            ),
-            _react2.default.createElement(
-              'form',
-              { className: classes.container },
-              _react2.default.createElement(_core.TextField, {
-                required: action === 'Create' ? true : null,
-                autoFocus: true,
-                margin: 'dense',
-                id: 'firstName',
-                label: 'First Name',
-                type: 'text',
-                className: classes.textField,
-                value: this.state.firstName,
-                fullWidth: true,
-                onChange: this.handleChange('firstName')
-              }),
-              _react2.default.createElement(_core.TextField, {
-                required: action === 'Create' ? true : null,
-                margin: 'dense',
-                id: 'lastName',
-                label: 'Last Name',
-                type: 'text',
-                className: classes.textField,
-                value: this.state.lastName,
-                fullWidth: true,
-                onChange: this.handleChange('lastName')
-              }),
-              _react2.default.createElement(_core.TextField, {
-                required: action === 'Create' ? true : null,
-                margin: 'dense',
-                id: 'email',
-                label: 'Email Address',
-                type: 'email',
-                className: classes.textField,
-                value: this.state.email,
-                fullWidth: true,
-                onChange: this.handleChange('email')
-              }),
-              _react2.default.createElement(_core.TextField, {
-                margin: 'dense',
-                id: 'imageUrl',
-                label: 'Student Image URL (Leave blank for default image)',
-                type: 'url',
-                className: classes.textField,
-                value: this.state.imageUrl,
-                fullWidth: true,
-                onChange: this.handleChange('imageUrl')
-              }),
-              _react2.default.createElement(
-                _core.InputLabel,
-                { className: classes.inputLabel, htmlFor: 'campusId' },
-                'Campus'
-              ),
-              _react2.default.createElement(
-                _core.Select,
-                {
-                  width: '20',
-                  margin: 'dense',
-                  value: this.state.campusId,
-                  type: 'text',
-                  className: classes.select,
-                  onChange: this.handleChange('campusId'),
-                  inputProps: {
-                    name: 'campusId',
-                    id: 'campusId'
-                  }
-                },
-                _react2.default.createElement(
-                  _core.MenuItem,
-                  { value: '' },
-                  _react2.default.createElement(
-                    'em',
-                    null,
-                    'Select a Campus'
-                  )
-                ),
-                this.props.campuses.map(function (campus) {
-                  return _react2.default.createElement(
-                    _core.MenuItem,
-                    { key: campus.id, value: campus.id },
-                    campus.name
-                  );
-                })
-              ),
-              _react2.default.createElement(_core.TextField, {
-                id: 'gpa',
-                label: 'GPA',
-                value: this.state.gpa,
-                onChange: this.handleChange('gpa'),
-                type: 'number',
-                className: classes.textField,
-                margin: 'normal',
-                InputProps: { inputProps: { min: 0, max: 4, step: 0.01 } }
-              })
-            )
-          ),
-          _react2.default.createElement(
-            _core.DialogActions,
-            null,
-            _react2.default.createElement(
-              _core.Button,
-              { onClick: this.handleClose, color: 'primary' },
-              'Cancel'
-            ),
-            _react2.default.createElement(
-              _core.Button,
-              { onClick: this.handleSubmit, color: 'primary' },
-              action,
-              '!'
-            )
-          )
-        )
+        'hi'
       );
     }
   }]);
 
-  return StudentFormDialog;
+  return NewCalculation;
 }(_react.Component);
 
-StudentFormDialog.propTypes = {
-  classes: _propTypes2.default.object.isRequired
-};
-
-exports.default = (0, _styles.withStyles)(_styles3.default)(StudentFormDialog);
-
-/***/ }),
-
-/***/ "./app/components/StudentsTable.js":
-/*!*****************************************!*\
-  !*** ./app/components/StudentsTable.js ***!
-  \*****************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
-var _react2 = _interopRequireDefault(_react);
-
-var _propTypes = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
-var _core = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/index.es.js");
-
-var _Delete = __webpack_require__(/*! @material-ui/icons/Delete */ "./node_modules/@material-ui/icons/Delete.js");
-
-var _Delete2 = _interopRequireDefault(_Delete);
-
-var _styles = __webpack_require__(/*! ./styles */ "./app/components/styles.js");
-
-var _styles2 = _interopRequireDefault(_styles);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function StudentsTable(props) {
-  var classes = props.classes;
-
-
-  return _react2.default.createElement(
-    _core.Paper,
-    { className: classes.root },
-    _react2.default.createElement(
-      _core.Toolbar,
-      null,
-      _react2.default.createElement(
-        _core.Typography,
-        { variant: 'h6', id: 'tableTitle' },
-        'Students'
-      )
-    ),
-    _react2.default.createElement(
-      _core.Table,
-      { className: classes.table, justify: 'center' },
-      _react2.default.createElement(
-        _core.TableHead,
-        null,
-        _react2.default.createElement(
-          _core.TableRow,
-          null,
-          _react2.default.createElement(
-            _core.TableCell,
-            null,
-            'First Name'
-          ),
-          _react2.default.createElement(
-            _core.TableCell,
-            null,
-            'Last Name'
-          ),
-          props.includeCampus ? _react2.default.createElement(
-            _core.TableCell,
-            null,
-            'Campus'
-          ) : null,
-          props.deleteStudent ? _react2.default.createElement(_core.TableCell, null) : null
-        )
-      ),
-      _react2.default.createElement(
-        _core.TableBody,
-        null,
-        props.students.sort(function (a, b) {
-          return a.id - b.id;
-        }).map(function (student) {
-          return _react2.default.createElement(
-            _core.TableRow,
-            { key: student.id, hover: true },
-            _react2.default.createElement(
-              _core.TableCell,
-              {
-                component: 'th',
-                scope: 'row',
-                onClick: function onClick() {
-                  return props.handleClick(student.id);
-                }
-              },
-              student.firstName
-            ),
-            _react2.default.createElement(
-              _core.TableCell,
-              { onClick: function onClick() {
-                  return props.handleClick(student.id);
-                } },
-              student.lastName
-            ),
-            props.includeCampus ? _react2.default.createElement(
-              _core.TableCell,
-              { onClick: function onClick() {
-                  return props.handleClick(student.id);
-                } },
-              student.campus ? student.campus.name : 'Not Enrolled'
-            ) : null,
-            props.deleteStudent ? _react2.default.createElement(
-              _core.TableCell,
-              null,
-              _react2.default.createElement(
-                _core.Button,
-                {
-                  variant: 'contained',
-                  color: 'secondary',
-                  className: classes.button,
-                  onClick: function onClick() {
-                    return props.deleteStudent(student.id);
-                  }
-                },
-                'Delete',
-                _react2.default.createElement(_Delete2.default, { className: classes.rightIcon })
-              )
-            ) : null
-          );
-        })
-      )
-    )
-  );
-}
-
-StudentsTable.propTypes = {
-  classes: _propTypes2.default.object.isRequired
-};
-
-exports.default = (0, _core.withStyles)(_styles2.default)(StudentsTable);
+exports.default = NewCalculation;
 
 /***/ }),
 
@@ -1017,39 +389,21 @@ Object.defineProperty(exports, 'Navbar', {
   }
 });
 
-var _NotFound = __webpack_require__(/*! ./NotFound */ "./app/components/NotFound.js");
+var _NewCalculation = __webpack_require__(/*! ./NewCalculation */ "./app/components/NewCalculation.js");
 
-Object.defineProperty(exports, 'NotFound', {
+Object.defineProperty(exports, 'NewCalculation', {
   enumerable: true,
   get: function get() {
-    return _interopRequireDefault(_NotFound).default;
+    return _interopRequireDefault(_NewCalculation).default;
   }
 });
 
-var _StudentFormDialog = __webpack_require__(/*! ./StudentFormDialog */ "./app/components/StudentFormDialog.js");
+var _CalculationsTable = __webpack_require__(/*! ./CalculationsTable */ "./app/components/CalculationsTable.js");
 
-Object.defineProperty(exports, 'StudentFormDialog', {
+Object.defineProperty(exports, 'CalculationsTable', {
   enumerable: true,
   get: function get() {
-    return _interopRequireDefault(_StudentFormDialog).default;
-  }
-});
-
-var _StudentsTable = __webpack_require__(/*! ./StudentsTable */ "./app/components/StudentsTable.js");
-
-Object.defineProperty(exports, 'StudentsTable', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_StudentsTable).default;
-  }
-});
-
-var _CampusFormDialog = __webpack_require__(/*! ./CampusFormDialog */ "./app/components/CampusFormDialog.js");
-
-Object.defineProperty(exports, 'CampusFormDialog', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_CampusFormDialog).default;
+    return _interopRequireDefault(_CalculationsTable).default;
   }
 });
 
@@ -1207,6 +561,300 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
     _react2.default.createElement(_routes2.default, null)
   )
 ), document.getElementById('main'));
+
+/***/ }),
+
+/***/ "./app/reducers/calculationsReducer.js":
+/*!*********************************************!*\
+  !*** ./app/reducers/calculationsReducer.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.updateCalculation = exports.deleteCalculation = exports.postNewCalculation = exports.fetchSingleCalculation = exports.fetchCalculations = undefined;
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+
+var _axios2 = _interopRequireDefault(_axios);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+//action types
+var GOT_CALCULATIONS_FROM_SERVER = 'GOT_CALCULATIONS_FROM_SERVER';
+var GOT_SINGLE_CALCULATION_FROM_SERVER = 'GOT_SINGLE_CALCULATION_FROM_SERVER';
+var GOT_NEW_CALCULATION_FROM_SERVER = 'GOT_NEW_CALCULATION_FROM_SERVER';
+var DELETED_CALCULATION_FROM_SERVER = 'DELETED_CALCULATION_FROM_SERVER';
+var GOT_UPDATED_CALCULATION_FROM_SERVER = 'GOT_UPDATED_CALCULATION_FROM_SERVER';
+
+//action creators
+var gotCalculationsFromServer = function gotCalculationsFromServer(calculations) {
+  return {
+    type: GOT_CALCULATIONS_FROM_SERVER,
+    calculations: calculations
+  };
+};
+
+//thunk creator for action creator above
+var fetchCalculations = exports.fetchCalculations = function fetchCalculations() {
+  return function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(dispatch) {
+      var res, calculations;
+      return regeneratorRuntime.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return _axios2.default.get('/api/calculations');
+
+            case 2:
+              res = _context.sent;
+              calculations = res.data;
+
+              dispatch(gotCalculationsFromServer(calculations));
+
+            case 5:
+            case 'end':
+              return _context.stop();
+          }
+        }
+      }, _callee, undefined);
+    }));
+
+    return function (_x) {
+      return _ref.apply(this, arguments);
+    };
+  }();
+};
+
+var gotSingleCalculationFromServer = function gotSingleCalculationFromServer(calculation) {
+  return {
+    type: GOT_SINGLE_CALCULATION_FROM_SERVER,
+    calculation: calculation
+  };
+};
+
+//thunk creator for action creator above
+var fetchSingleCalculation = exports.fetchSingleCalculation = function fetchSingleCalculation(calculationId, history) {
+  return function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(dispatch) {
+      var res, calculation;
+      return regeneratorRuntime.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.prev = 0;
+              _context2.next = 3;
+              return _axios2.default.get('/api/calculations/' + calculationId);
+
+            case 3:
+              res = _context2.sent;
+              calculation = res.data;
+
+              if (calculation.id) {
+                _context2.next = 7;
+                break;
+              }
+
+              throw new Error('calculation not found');
+
+            case 7:
+              dispatch(gotSingleCalculationFromServer(calculation));
+              _context2.next = 13;
+              break;
+
+            case 10:
+              _context2.prev = 10;
+              _context2.t0 = _context2['catch'](0);
+
+              history.push('/page-not-found/calculation/' + calculationId);
+
+            case 13:
+            case 'end':
+              return _context2.stop();
+          }
+        }
+      }, _callee2, undefined, [[0, 10]]);
+    }));
+
+    return function (_x2) {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+};
+
+var gotNewCalculationFromServer = function gotNewCalculationFromServer(calculation) {
+  return {
+    type: GOT_NEW_CALCULATION_FROM_SERVER,
+    calculation: calculation
+  };
+};
+//thunk creator for action creator above
+var postNewCalculation = exports.postNewCalculation = function postNewCalculation(calculation) {
+  return function () {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(dispatch) {
+      var res, calculationFromServer;
+      return regeneratorRuntime.wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              _context3.next = 2;
+              return _axios2.default.post('/api/calculations', calculation);
+
+            case 2:
+              res = _context3.sent;
+              calculationFromServer = res.data;
+
+              dispatch(gotNewCalculationFromServer(calculationFromServer));
+
+            case 5:
+            case 'end':
+              return _context3.stop();
+          }
+        }
+      }, _callee3, undefined);
+    }));
+
+    return function (_x3) {
+      return _ref3.apply(this, arguments);
+    };
+  }();
+};
+
+var deletedCalculationFromServer = function deletedCalculationFromServer(deletedCalculation) {
+  return {
+    type: DELETED_CALCULATION_FROM_SERVER,
+    deletedCalculation: deletedCalculation
+  };
+};
+//thunk creator for action creator above
+var deleteCalculation = exports.deleteCalculation = function deleteCalculation(calculationId) {
+  return function () {
+    var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(dispatch) {
+      var res, deletedCalculation;
+      return regeneratorRuntime.wrap(function _callee4$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              _context4.next = 2;
+              return _axios2.default.delete('/api/calculations/' + calculationId);
+
+            case 2:
+              res = _context4.sent;
+              deletedCalculation = res.data;
+
+              dispatch(deletedCalculationFromServer(deletedCalculation));
+
+            case 5:
+            case 'end':
+              return _context4.stop();
+          }
+        }
+      }, _callee4, undefined);
+    }));
+
+    return function (_x4) {
+      return _ref4.apply(this, arguments);
+    };
+  }();
+};
+
+var gotUpdatedCalculationFromServer = function gotUpdatedCalculationFromServer(updatedCalculation) {
+  return {
+    type: GOT_UPDATED_CALCULATION_FROM_SERVER,
+    updatedCalculation: updatedCalculation
+  };
+};
+//thunk creator for action creator above
+var updateCalculation = exports.updateCalculation = function updateCalculation(updatedInfo, calculationId) {
+  return function () {
+    var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(dispatch) {
+      var res, updatedCalculation;
+      return regeneratorRuntime.wrap(function _callee5$(_context5) {
+        while (1) {
+          switch (_context5.prev = _context5.next) {
+            case 0:
+              _context5.next = 2;
+              return _axios2.default.put('/api/calculations/' + calculationId, updatedInfo);
+
+            case 2:
+              res = _context5.sent;
+              updatedCalculation = res.data;
+
+              dispatch(gotUpdatedCalculationFromServer(updatedCalculation));
+
+            case 5:
+            case 'end':
+              return _context5.stop();
+          }
+        }
+      }, _callee5, undefined);
+    }));
+
+    return function (_x5) {
+      return _ref5.apply(this, arguments);
+    };
+  }();
+};
+
+//initial state
+var initialState = {
+  calculations: [],
+  selectedCalculation: {}
+};
+
+var calculationsReducer = function calculationsReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+  var action = arguments[1];
+
+  switch (action.type) {
+    case GOT_CALCULATIONS_FROM_SERVER:
+      return _extends({}, state, {
+        calculations: action.calculations
+      });
+    case GOT_SINGLE_CALCULATION_FROM_SERVER:
+      return _extends({}, state, {
+        selectedCalculation: action.calculation
+      });
+    case GOT_NEW_CALCULATION_FROM_SERVER:
+      return _extends({}, state, {
+        calculations: [].concat(_toConsumableArray(state.calculations), [action.calculation])
+      });
+    case DELETED_CALCULATION_FROM_SERVER:
+      return _extends({}, state, {
+        calculations: state.calculations.filter(function (calculation) {
+          return calculation.id !== action.deletedCalculation.id;
+        })
+      });
+    case GOT_UPDATED_CALCULATION_FROM_SERVER:
+      return _extends({}, state, {
+        calculations: state.calculations.map(function (calculation) {
+          if (calculation.id === action.updatedCalculation.id) {
+            return action.updatedCalculation;
+          } else {
+            return calculation;
+          }
+        }),
+        selectedCalculation: action.updatedCalculation
+      });
+
+    default:
+      return state;
+  }
+};
+
+exports.default = calculationsReducer;
 
 /***/ }),
 
@@ -1520,321 +1168,27 @@ Object.defineProperty(exports, "__esModule", {
 
 var _redux = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 
-var _studentsReducer = __webpack_require__(/*! ./studentsReducer */ "./app/reducers/studentsReducer.js");
+var _calculationsReducer = __webpack_require__(/*! ./calculationsReducer */ "./app/reducers/calculationsReducer.js");
 
-var _studentsReducer2 = _interopRequireDefault(_studentsReducer);
-
-var _campusesReducer = __webpack_require__(/*! ./campusesReducer */ "./app/reducers/campusesReducer.js");
-
-var _campusesReducer2 = _interopRequireDefault(_campusesReducer);
-
-var _reduxLogger = __webpack_require__(/*! redux-logger */ "./node_modules/redux-logger/dist/redux-logger.js");
-
-var _reduxLogger2 = _interopRequireDefault(_reduxLogger);
-
-var _reduxThunk = __webpack_require__(/*! redux-thunk */ "./node_modules/redux-thunk/es/index.js");
-
-var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
+var _calculationsReducer2 = _interopRequireDefault(_calculationsReducer);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// import studentsReducer from './studentsReducer';
+// import campusesReducer from './campusesReducer';
 
 // const initialState = {};
 
-var rootReducer = (0, _redux.combineReducers)({
-  students: _studentsReducer2.default,
-  campuses: _campusesReducer2.default
-}); // `combineReducers` is not currently being used...but it should!
+// `combineReducers` is not currently being used...but it should!
 // When you're ready to use it, un-comment the line below!
 
+var rootReducer = (0, _redux.combineReducers)({ calculations: _calculationsReducer2.default });
+// const rootReducer = combineReducers({
+//   students: studentsReducer,
+//   campuses: campusesReducer,
+// });
+
 exports.default = rootReducer;
-
-/***/ }),
-
-/***/ "./app/reducers/studentsReducer.js":
-/*!*****************************************!*\
-  !*** ./app/reducers/studentsReducer.js ***!
-  \*****************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.updateStudent = exports.deleteStudent = exports.postNewStudent = exports.fetchSingleStudent = exports.fetchStudents = undefined;
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-
-var _axios2 = _interopRequireDefault(_axios);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
-
-//action types
-var GOT_STUDENTS_FROM_SERVER = 'GOT_STUDENTS_FROM_SERVER';
-var GOT_SINGLE_STUDENT_FROM_SERVER = 'GOT_SINGLE_STUDENT_FROM_SERVER';
-var GOT_NEW_STUDENT_FROM_SERVER = 'GOT_NEW_STUDENT_FROM_SERVER';
-var GOT_DELETED_STUDENT_FROM_SERVER = 'GOT_DELETED_STUDENT_FROM_SERVER';
-var GOT_UPDATED_STUDENT_FROM_SERVER = 'GOT_UPDATED_STUDENT_FROM_SERVER';
-//action creators
-var gotStudentsFromServer = function gotStudentsFromServer(students) {
-  return {
-    type: GOT_STUDENTS_FROM_SERVER,
-    students: students
-  };
-};
-
-//thunk creator for action creator above
-var fetchStudents = exports.fetchStudents = function fetchStudents() {
-  return function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(dispatch) {
-      var res, students;
-      return regeneratorRuntime.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _context.next = 2;
-              return _axios2.default.get('/api/students');
-
-            case 2:
-              res = _context.sent;
-              students = res.data;
-
-              dispatch(gotStudentsFromServer(students));
-
-            case 5:
-            case 'end':
-              return _context.stop();
-          }
-        }
-      }, _callee, undefined);
-    }));
-
-    return function (_x) {
-      return _ref.apply(this, arguments);
-    };
-  }();
-};
-
-var gotSingleStudentFromServer = function gotSingleStudentFromServer(student) {
-  return {
-    type: GOT_SINGLE_STUDENT_FROM_SERVER,
-    student: student
-  };
-};
-
-//thunk creator for action creator above
-var fetchSingleStudent = exports.fetchSingleStudent = function fetchSingleStudent(studentId, history) {
-  return function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(dispatch) {
-      var res, student;
-      return regeneratorRuntime.wrap(function _callee2$(_context2) {
-        while (1) {
-          switch (_context2.prev = _context2.next) {
-            case 0:
-              _context2.prev = 0;
-              _context2.next = 3;
-              return _axios2.default.get('/api/students/' + studentId);
-
-            case 3:
-              res = _context2.sent;
-              student = res.data;
-
-              if (student.id) {
-                _context2.next = 7;
-                break;
-              }
-
-              throw new Error('student not found');
-
-            case 7:
-              dispatch(gotSingleStudentFromServer(student));
-              _context2.next = 13;
-              break;
-
-            case 10:
-              _context2.prev = 10;
-              _context2.t0 = _context2['catch'](0);
-
-              history.push('/page-not-found/student/' + studentId);
-
-            case 13:
-            case 'end':
-              return _context2.stop();
-          }
-        }
-      }, _callee2, undefined, [[0, 10]]);
-    }));
-
-    return function (_x2) {
-      return _ref2.apply(this, arguments);
-    };
-  }();
-};
-
-var gotNewStudentFromServer = function gotNewStudentFromServer(student) {
-  return {
-    type: GOT_NEW_STUDENT_FROM_SERVER,
-    student: student
-  };
-};
-
-var postNewStudent = exports.postNewStudent = function postNewStudent(student) {
-  return function () {
-    var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(dispatch) {
-      var res, studentFromServer;
-      return regeneratorRuntime.wrap(function _callee3$(_context3) {
-        while (1) {
-          switch (_context3.prev = _context3.next) {
-            case 0:
-              _context3.next = 2;
-              return _axios2.default.post('/api/students', student);
-
-            case 2:
-              res = _context3.sent;
-              studentFromServer = res.data;
-
-              dispatch(gotNewStudentFromServer(studentFromServer));
-
-            case 5:
-            case 'end':
-              return _context3.stop();
-          }
-        }
-      }, _callee3, undefined);
-    }));
-
-    return function (_x3) {
-      return _ref3.apply(this, arguments);
-    };
-  }();
-};
-
-var gotDeletedStudentFromServer = function gotDeletedStudentFromServer(deletedStudent) {
-  return {
-    type: GOT_DELETED_STUDENT_FROM_SERVER,
-    deletedStudent: deletedStudent
-  };
-};
-//thunk creator for action creator above
-var deleteStudent = exports.deleteStudent = function deleteStudent(studentId) {
-  return function () {
-    var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(dispatch) {
-      var res, deletedStudent;
-      return regeneratorRuntime.wrap(function _callee4$(_context4) {
-        while (1) {
-          switch (_context4.prev = _context4.next) {
-            case 0:
-              _context4.next = 2;
-              return _axios2.default.delete('/api/students/' + studentId);
-
-            case 2:
-              res = _context4.sent;
-              deletedStudent = res.data;
-
-              dispatch(gotDeletedStudentFromServer(deletedStudent));
-
-            case 5:
-            case 'end':
-              return _context4.stop();
-          }
-        }
-      }, _callee4, undefined);
-    }));
-
-    return function (_x4) {
-      return _ref4.apply(this, arguments);
-    };
-  }();
-};
-
-var gotUpdatedStudentFromServer = function gotUpdatedStudentFromServer(updatedStudent) {
-  return {
-    type: GOT_UPDATED_STUDENT_FROM_SERVER,
-    updatedStudent: updatedStudent
-  };
-};
-
-var updateStudent = exports.updateStudent = function updateStudent(updatedInfo, studentId) {
-  return function () {
-    var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(dispatch) {
-      var res, updatedStudent;
-      return regeneratorRuntime.wrap(function _callee5$(_context5) {
-        while (1) {
-          switch (_context5.prev = _context5.next) {
-            case 0:
-              _context5.next = 2;
-              return _axios2.default.put('/api/students/' + studentId, updatedInfo);
-
-            case 2:
-              res = _context5.sent;
-              updatedStudent = res.data;
-
-              dispatch(gotUpdatedStudentFromServer(updatedStudent));
-
-            case 5:
-            case 'end':
-              return _context5.stop();
-          }
-        }
-      }, _callee5, undefined);
-    }));
-
-    return function (_x5) {
-      return _ref5.apply(this, arguments);
-    };
-  }();
-};
-
-//initial state
-var initialState = {
-  students: [],
-  selectedStudent: {}
-};
-
-var studentsReducer = function studentsReducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
-  var action = arguments[1];
-
-  switch (action.type) {
-    case GOT_STUDENTS_FROM_SERVER:
-      return _extends({}, state, {
-        students: action.students
-      });
-    case GOT_SINGLE_STUDENT_FROM_SERVER:
-      return _extends({}, state, { selectedStudent: action.student });
-    case GOT_NEW_STUDENT_FROM_SERVER:
-      return _extends({}, state, { students: [].concat(_toConsumableArray(state.students), [action.student]) });
-    case GOT_DELETED_STUDENT_FROM_SERVER:
-      return _extends({}, state, {
-        students: state.students.filter(function (student) {
-          return student.id !== action.deletedStudent.id;
-        })
-      });
-    case GOT_UPDATED_STUDENT_FROM_SERVER:
-      return _extends({}, state, {
-        students: state.students.map(function (student) {
-          if (student.id === action.updatedStudent.id) {
-            return action.updatedStudent;
-          } else {
-            return student;
-          }
-        }),
-        selectedStudent: action.updatedStudent
-      });
-    default:
-      return state;
-  }
-};
-
-exports.default = studentsReducer;
 
 /***/ }),
 
@@ -1885,21 +1239,12 @@ var Routes = function Routes(props) {
         _reactRouterDom.Switch,
         null,
         _react2.default.createElement(_reactRouterDom.Route, {
-          path: '/campuses/:campusId',
+          path: '/calculations',
           render: function render(renderProps) {
-            return _react2.default.createElement(_screens.SingleCampus, renderProps);
-          }
-        }),
-        _react2.default.createElement(_reactRouterDom.Route, { path: '/students/:studentId', component: _screens.SingleStudent }),
-        _react2.default.createElement(_reactRouterDom.Route, { path: '/campuses', component: _screens.AllCampuses }),
-        _react2.default.createElement(_reactRouterDom.Route, {
-          path: '/students',
-          render: function render(renderProps) {
-            return _react2.default.createElement(_screens.AllStudents, renderProps);
+            return _react2.default.createElement(_screens.AllCalculations, renderProps);
           }
         }),
         _react2.default.createElement(_reactRouterDom.Route, { path: '/home', component: _screens.Home }),
-        _react2.default.createElement(_reactRouterDom.Route, { path: '/page-not-found/:type/:id', component: _components.NotFound }),
         _react2.default.createElement(_reactRouterDom.Redirect, { to: '/home' })
       )
     ),
@@ -1933,10 +1278,10 @@ exports.default = (0, _core.withStyles)(_components.styles)((0, _reactRouterDom.
 
 /***/ }),
 
-/***/ "./app/screens/AllCampuses.js":
-/*!************************************!*\
-  !*** ./app/screens/AllCampuses.js ***!
-  \************************************/
+/***/ "./app/screens/AllCalculations.js":
+/*!****************************************!*\
+  !*** ./app/screens/AllCalculations.js ***!
+  \****************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1947,224 +1292,15 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRouterDom = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+var _axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 
-var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-
-var _campusesReducer = __webpack_require__(/*! ../reducers/campusesReducer */ "./app/reducers/campusesReducer.js");
-
-var _components = __webpack_require__(/*! ../components */ "./app/components/index.js");
-
-var _reactEmotion = __webpack_require__(/*! react-emotion */ "./node_modules/react-emotion/dist/index.esm.js");
-
-var _reactSpinners = __webpack_require__(/*! react-spinners */ "./node_modules/react-spinners/index.js");
-
-var _propTypes = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
-var _classnames = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
-
-var _classnames2 = _interopRequireDefault(_classnames);
-
-var _core = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/index.es.js");
-
-var _Delete = __webpack_require__(/*! @material-ui/icons/Delete */ "./node_modules/@material-ui/icons/Delete.js");
-
-var _Delete2 = _interopRequireDefault(_Delete);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var override = /*#__PURE__*/(0, _reactEmotion.css)('display:block;margin:0 auto;border-color:red;');
-
-var AllCampuses = function (_Component) {
-  _inherits(AllCampuses, _Component);
-
-  function AllCampuses() {
-    _classCallCheck(this, AllCampuses);
-
-    return _possibleConstructorReturn(this, (AllCampuses.__proto__ || Object.getPrototypeOf(AllCampuses)).apply(this, arguments));
-  }
-
-  _createClass(AllCampuses, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      this.props.fetchCampuses();
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _this2 = this;
-
-      var classes = this.props.classes;
-
-      return _react2.default.createElement(
-        _react2.default.Fragment,
-        null,
-        _react2.default.createElement(_core.CssBaseline, null),
-        _react2.default.createElement(
-          _core.Typography,
-          {
-            component: 'h1',
-            variant: 'h2',
-            align: 'center',
-            color: 'textPrimary'
-          },
-          'Campuses'
-        ),
-        !this.props.campuses.length ? _react2.default.createElement(
-          _react2.default.Fragment,
-          null,
-          _react2.default.createElement(
-            'h3',
-            null,
-            'Loading Campuses...'
-          ),
-          _react2.default.createElement(_reactSpinners.RingLoader, {
-            className: override,
-            sizeUnit: 'px',
-            size: 50,
-            color: 'green',
-            loading: true
-          })
-        ) : _react2.default.createElement(
-          _react2.default.Fragment,
-          null,
-          this.props.home ? null : _react2.default.createElement(_components.CampusFormDialog, _extends({ action: 'Create', type: 'Campus' }, this.props)),
-          _react2.default.createElement('div', { className: (0, _classnames2.default)(classes.layout, classes.cardGrid) }),
-          _react2.default.createElement(
-            _core.Grid,
-            { container: true, spacing: 40 },
-            this.props.campuses.map(function (campus) {
-              return _react2.default.createElement(
-                _core.Grid,
-                { item: true, key: campus.id, sm: 6, md: 4, lg: 3 },
-                _react2.default.createElement(
-                  _core.Card,
-                  { className: classes.card },
-                  _react2.default.createElement(_core.CardMedia, {
-                    className: classes.cardMedia,
-                    image: campus.imageUrl,
-                    title: campus.name + '-Image'
-                  }),
-                  _react2.default.createElement(
-                    _core.CardContent,
-                    { className: classes.cardContent },
-                    _react2.default.createElement(
-                      _core.Typography,
-                      { gutterBottom: true, variant: 'h5', component: 'h2' },
-                      campus.name
-                    ),
-                    campus.description ? _react2.default.createElement(
-                      _core.Typography,
-                      { gutterBottom: true },
-                      campus.description.split('.')[0]
-                    ) : _react2.default.createElement(_core.Typography, { gutterBottom: true }),
-                    _react2.default.createElement(
-                      _core.Button,
-                      {
-                        variant: 'contained',
-                        color: 'primary',
-                        component: _reactRouterDom.Link,
-                        to: '/campuses/' + campus.id
-                      },
-                      'View'
-                    ),
-                    _react2.default.createElement(
-                      _core.Button,
-                      {
-                        variant: 'contained',
-                        color: 'secondary',
-                        className: classes.button,
-                        onClick: function onClick() {
-                          return _this2.props.deleteCampus(campus.id);
-                        }
-                      },
-                      'Delete',
-                      _react2.default.createElement(_Delete2.default, { className: classes.rightIcon })
-                    )
-                  )
-                )
-              );
-            })
-          )
-        )
-      );
-    }
-  }]);
-
-  return AllCampuses;
-}(_react.Component);
-
-var mapStateToProps = function mapStateToProps(state) {
-  return {
-    campuses: state.campuses.campuses
-  };
-};
-
-var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {
-    fetchCampuses: function fetchCampuses() {
-      return dispatch((0, _campusesReducer.fetchCampuses)());
-    },
-    deleteCampus: function deleteCampus(campusId) {
-      return dispatch((0, _campusesReducer.deleteCampus)(campusId));
-    },
-    postCampus: function postCampus(newCampus) {
-      return dispatch((0, _campusesReducer.postNewCampus)(newCampus));
-    }
-  };
-};
-
-AllCampuses.propTypes = {
-  classes: _propTypes2.default.object.isRequired
-};
-
-exports.default = (0, _core.withStyles)(_components.styles)((0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(AllCampuses));
-
-/***/ }),
-
-/***/ "./app/screens/AllStudents.js":
-/*!************************************!*\
-  !*** ./app/screens/AllStudents.js ***!
-  \************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-
-var _studentsReducer = __webpack_require__(/*! ../reducers/studentsReducer */ "./app/reducers/studentsReducer.js");
-
-var _campusesReducer = __webpack_require__(/*! ../reducers/campusesReducer */ "./app/reducers/campusesReducer.js");
+var _axios2 = _interopRequireDefault(_axios);
 
 var _components = __webpack_require__(/*! ../components */ "./app/components/index.js");
 
@@ -2176,39 +1312,89 @@ var _core = __webpack_require__(/*! @material-ui/core */ "./node_modules/@materi
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+// import { connect } from 'react-redux';
+
+// import {
+//   fetchStudents,
+//   deleteStudent,
+//   postNewStudent,
+// } from '../reducers/studentsReducer';
+// import { fetchCampuses } from '../reducers/campusesReducer';
+
 
 var override = /*#__PURE__*/(0, _reactEmotion.css)('display:block;margin:0 auto;border-color:red;');
 
-var AllStudents = function (_Component) {
-  _inherits(AllStudents, _Component);
+var AllCalculations = function (_Component) {
+  _inherits(AllCalculations, _Component);
 
-  function AllStudents(props) {
-    _classCallCheck(this, AllStudents);
+  function AllCalculations(props) {
+    _classCallCheck(this, AllCalculations);
 
-    var _this = _possibleConstructorReturn(this, (AllStudents.__proto__ || Object.getPrototypeOf(AllStudents)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (AllCalculations.__proto__ || Object.getPrototypeOf(AllCalculations)).call(this, props));
 
-    _this.handleClick = _this.handleClick.bind(_this);
+    _this.handleClick = function (evt) {
+      // return this.props.history.push(`/students/${studentId}`);
+      console.log('clicked', evt);
+    };
+
+    _this.state = { calculations: [] };
     return _this;
   }
 
-  _createClass(AllStudents, [{
+  _createClass(AllCalculations, [{
     key: 'componentDidMount',
-    value: function componentDidMount() {
-      this.props.fetchStudents();
-    }
-  }, {
-    key: 'handleClick',
-    value: function handleClick(studentId) {
-      return this.props.history.push('/students/' + studentId);
-    }
+    value: function () {
+      var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+        var _ref2, data;
+
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.prev = 0;
+                _context.next = 3;
+                return _axios2.default.get('/api/calculations');
+
+              case 3:
+                _ref2 = _context.sent;
+                data = _ref2.data;
+
+                this.setState({ calculations: data });
+                _context.next = 11;
+                break;
+
+              case 8:
+                _context.prev = 8;
+                _context.t0 = _context['catch'](0);
+
+                console.error(_context.t0);
+
+              case 11:
+              case 'end':
+                return _context.stop();
+            }
+          }
+        }, _callee, this, [[0, 8]]);
+      }));
+
+      function componentDidMount() {
+        return _ref.apply(this, arguments);
+      }
+
+      return componentDidMount;
+    }()
   }, {
     key: 'render',
     value: function render() {
+      var calculations = this.state.calculations;
+
       return _react2.default.createElement(
         _react2.default.Fragment,
         null,
@@ -2220,15 +1406,15 @@ var AllStudents = function (_Component) {
             align: 'center',
             color: 'textPrimary'
           },
-          'Students'
+          'Calculations'
         ),
-        !this.props.students.length ? _react2.default.createElement(
+        !calculations.length ? _react2.default.createElement(
           _react2.default.Fragment,
           null,
           _react2.default.createElement(
             'h3',
             null,
-            'Loading Students... nom,nom,nom'
+            'Loading Past Calculations... nom,nom,nom'
           ),
           _react2.default.createElement(_reactSpinners.PacmanLoader, {
             className: override,
@@ -2240,11 +1426,8 @@ var AllStudents = function (_Component) {
         ) : _react2.default.createElement(
           _react2.default.Fragment,
           null,
-          _react2.default.createElement(_components.StudentFormDialog, _extends({ action: 'Create', type: 'Student' }, this.props)),
-          _react2.default.createElement(_components.StudentsTable, {
-            students: this.props.students,
-            includeCampus: true,
-            deleteStudent: this.props.deleteStudent,
+          _react2.default.createElement(_components.CalculationsTable, {
+            calculations: calculations,
             handleClick: this.handleClick
           })
         )
@@ -2252,34 +1435,26 @@ var AllStudents = function (_Component) {
     }
   }]);
 
-  return AllStudents;
+  return AllCalculations;
 }(_react.Component);
 
-var mapStateToProps = function mapStateToProps(state) {
-  return {
-    students: state.students.students,
-    campuses: state.campuses.campuses
-  };
-};
+// const mapStateToProps = state => {
+//   return {
+//     students: state.students.students,
+//     campuses: state.campuses.campuses,
+//   };
+// };
 
-var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {
-    fetchStudents: function fetchStudents() {
-      return dispatch((0, _studentsReducer.fetchStudents)());
-    },
-    fetchCampuses: function fetchCampuses() {
-      return dispatch((0, _campusesReducer.fetchCampuses)());
-    },
-    deleteStudent: function deleteStudent(studentId) {
-      return dispatch((0, _studentsReducer.deleteStudent)(studentId));
-    },
-    postStudent: function postStudent(newStudent) {
-      return dispatch((0, _studentsReducer.postNewStudent)(newStudent));
-    }
-  };
-};
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     fetchStudents: () => dispatch(fetchStudents()),
+//     fetchCampuses: () => dispatch(fetchCampuses()),
+//     deleteStudent: studentId => dispatch(deleteStudent(studentId)),
+//     postStudent: newStudent => dispatch(postNewStudent(newStudent)),
+//   };
+// };
 
-exports.default = (0, _core.withStyles)(_components.styles)((0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(AllStudents));
+exports.default = (0, _core.withStyles)(_components.styles)(AllCalculations);
 
 /***/ }),
 
@@ -2297,6 +1472,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
 var _react2 = _interopRequireDefault(_react);
@@ -2309,86 +1488,81 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _components = __webpack_require__(/*! ../components */ "./app/components/index.js");
 
-var _AllCampuses = __webpack_require__(/*! ./AllCampuses */ "./app/screens/AllCampuses.js");
+var _AllCalculations = __webpack_require__(/*! ./AllCalculations */ "./app/screens/AllCalculations.js");
+
+var _AllCalculations2 = _interopRequireDefault(_AllCalculations);
 
 var _core = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/index.es.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var Home = function Home(props) {
-  var classes = props.classes;
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-  return _react2.default.createElement(
-    _react2.default.Fragment,
-    null,
-    _react2.default.createElement(_core.CssBaseline, null),
-    _react2.default.createElement(
-      'div',
-      { className: classes.heroUnit },
-      _react2.default.createElement(
-        'div',
-        { className: classes.heroContent },
-        _react2.default.createElement(
-          _core.Typography,
-          {
-            component: 'h1',
-            variant: 'h2',
-            align: 'center',
-            color: 'textPrimary',
-            gutterBottom: true
-          },
-          'This is the Hero Header!'
-        ),
-        _react2.default.createElement(
-          _core.Typography,
-          {
-            variant: 'h6',
-            align: 'center',
-            color: 'textSecondary',
-            paragraph: true
-          },
-          'This is the Hero Secondary Text!'
-        ),
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Home = function (_Component) {
+  _inherits(Home, _Component);
+
+  function Home() {
+    _classCallCheck(this, Home);
+
+    return _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).apply(this, arguments));
+  }
+
+  _createClass(Home, [{
+    key: 'render',
+    value: function render() {
+      var _props = props,
+          classes = _props.classes;
+
+      return _react2.default.createElement(
+        _react2.default.Fragment,
+        null,
+        _react2.default.createElement(_core.CssBaseline, null),
         _react2.default.createElement(
           'div',
-          { className: classes.heroButtons },
+          { className: classes.heroUnit },
           _react2.default.createElement(
-            _core.Grid,
-            { container: true, spacing: 16, justify: 'center' },
+            'div',
+            { className: classes.heroContent },
             _react2.default.createElement(
-              _core.Grid,
-              { item: true },
-              _react2.default.createElement(
-                _core.Button,
-                {
-                  variant: 'contained',
-                  color: 'primary',
-                  component: _reactRouterDom.Link,
-                  to: '/campuses'
-                },
-                'Hero Button 1'
-              )
+              _core.Typography,
+              {
+                component: 'h1',
+                variant: 'h2',
+                align: 'center',
+                color: 'textPrimary',
+                gutterBottom: true
+              },
+              'Welcome to CloudCalc!'
             ),
             _react2.default.createElement(
-              _core.Grid,
-              { item: true },
-              _react2.default.createElement(
-                _core.Button,
-                {
-                  variant: 'contained',
-                  color: 'primary',
-                  component: _reactRouterDom.Link,
-                  to: '/students'
-                },
-                'Hero Button 2'
-              )
-            )
+              _core.Typography,
+              {
+                variant: 'h6',
+                align: 'center',
+                color: 'textSecondary',
+                paragraph: true
+              },
+              'Enter a new expression below:'
+            ),
+            _react2.default.createElement(_components.NewCalculation, null)
           )
-        )
-      )
-    )
-  );
-};
+        ),
+        _react2.default.createElement(
+          _core.Typography,
+          { variant: 'h6', align: 'center', color: 'textSecondary', paragraph: true },
+          'Click any of the past expressions to add it to your new expression'
+        ),
+        _react2.default.createElement(_AllCalculations2.default, _extends({}, props, { home: true }))
+      );
+    }
+  }]);
+
+  return Home;
+}(_react.Component);
 
 Home.propTypes = {
   classes: _propTypes2.default.object.isRequired
@@ -2398,10 +1572,10 @@ exports.default = (0, _core.withStyles)(_components.styles)(Home);
 
 /***/ }),
 
-/***/ "./app/screens/SingleCampus.js":
-/*!*************************************!*\
-  !*** ./app/screens/SingleCampus.js ***!
-  \*************************************/
+/***/ "./app/screens/SingleCalculation.js":
+/*!******************************************!*\
+  !*** ./app/screens/SingleCalculation.js ***!
+  \******************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2624,228 +1798,6 @@ exports.default = (0, _core.withStyles)(styles)((0, _reactRedux.connect)(mapStat
 
 /***/ }),
 
-/***/ "./app/screens/SingleStudent.js":
-/*!**************************************!*\
-  !*** ./app/screens/SingleStudent.js ***!
-  \**************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-
-var _components = __webpack_require__(/*! ../components */ "./app/components/index.js");
-
-var _studentsReducer = __webpack_require__(/*! ../reducers/studentsReducer */ "./app/reducers/studentsReducer.js");
-
-var _campusesReducer = __webpack_require__(/*! ../reducers/campusesReducer */ "./app/reducers/campusesReducer.js");
-
-var _reactEmotion = __webpack_require__(/*! react-emotion */ "./node_modules/react-emotion/dist/index.esm.js");
-
-var _reactSpinners = __webpack_require__(/*! react-spinners */ "./node_modules/react-spinners/index.js");
-
-var _propTypes = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
-var _core = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/index.es.js");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var override = /*#__PURE__*/(0, _reactEmotion.css)('display:block;margin:0 auto;border-color:red;');
-
-var styles = function styles(theme) {
-  return {
-    cardGrid: {
-      padding: theme.spacing.unit * 8 + 'px 0'
-    },
-    card: {
-      minWidth: 500,
-      maxWidth: 800
-    },
-    cardMedia: {
-      paddingTop: '56.25%' // 16:9
-    },
-    cardContent: {
-      flexGrow: 1
-    }
-  };
-};
-
-var SingleStudent = function (_Component) {
-  _inherits(SingleStudent, _Component);
-
-  function SingleStudent(props) {
-    _classCallCheck(this, SingleStudent);
-
-    var _this = _possibleConstructorReturn(this, (SingleStudent.__proto__ || Object.getPrototypeOf(SingleStudent)).call(this, props));
-
-    _this.handleCampusClick = _this.handleCampusClick.bind(_this);
-    return _this;
-  }
-
-  _createClass(SingleStudent, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      this.props.fetchSingleStudent(this.props.match.params.studentId, this.props.history);
-    }
-  }, {
-    key: 'handleCampusClick',
-    value: function handleCampusClick(campusId) {
-      this.props.history.push('/campuses/' + campusId);
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _this2 = this;
-
-      var _props = this.props,
-          classes = _props.classes,
-          student = _props.student;
-
-      return _react2.default.createElement(
-        _react2.default.Fragment,
-        null,
-        !student.id ? _react2.default.createElement(
-          _react2.default.Fragment,
-          null,
-          _react2.default.createElement(
-            'h3',
-            null,
-            'Loading Student...'
-          ),
-          _react2.default.createElement(_reactSpinners.GridLoader, {
-            className: override,
-            sizeUnit: 'px',
-            size: 25,
-            color: 'green',
-            loading: true
-          })
-        ) : _react2.default.createElement(
-          _react2.default.Fragment,
-          null,
-          _react2.default.createElement(_components.StudentFormDialog, _extends({ action: 'Update', type: 'Student' }, this.props)),
-          _react2.default.createElement(
-            _core.Grid,
-            { container: true, justify: 'center' },
-            _react2.default.createElement(
-              _core.Grid,
-              { item: true },
-              _react2.default.createElement(
-                _core.Card,
-                { className: classes.card, justify: 'center' },
-                _react2.default.createElement(
-                  _core.CardContent,
-                  { className: classes.cardContent },
-                  _react2.default.createElement(
-                    _core.Typography,
-                    {
-                      gutterBottom: true,
-                      variant: 'h5',
-                      component: 'h2',
-                      align: 'center'
-                    },
-                    student.firstName,
-                    ' ',
-                    student.lastName
-                  ),
-                  _react2.default.createElement(_core.CardMedia, {
-                    className: classes.cardMedia,
-                    image: student.imageUrl,
-                    title: student.name + '-Image',
-                    align: 'center'
-                  }),
-                  _react2.default.createElement(
-                    _core.Typography,
-                    { gutterBottom: true, align: 'left' },
-                    'Email: ',
-                    student.email
-                  ),
-                  _react2.default.createElement(
-                    _core.Typography,
-                    { gutterBottom: true, align: 'left' },
-                    'GPA:',
-                    ' ',
-                    student.gpa !== null ? student.gpa.toFixed(2) : 'N/A'
-                  ),
-                  _react2.default.createElement(
-                    _core.Typography,
-                    null,
-                    'Campus:',
-                    ' ',
-                    student.campus ? _react2.default.createElement(
-                      _core.Button,
-                      {
-                        onClick: function onClick() {
-                          return _this2.handleCampusClick(student.campusId);
-                        },
-                        variant: 'outlined',
-                        color: 'secondary'
-                      },
-                      student.campus.name
-                    ) : 'Not Currently Enrolled'
-                  )
-                )
-              )
-            )
-          )
-        )
-      );
-    }
-  }]);
-
-  return SingleStudent;
-}(_react.Component);
-
-var mapStateToProps = function mapStateToProps(state) {
-  return {
-    student: state.students.selectedStudent,
-    campuses: state.campuses.campuses
-  };
-};
-
-var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {
-    fetchSingleStudent: function fetchSingleStudent(studentId, history) {
-      return dispatch((0, _studentsReducer.fetchSingleStudent)(studentId, history));
-    },
-    fetchCampuses: function fetchCampuses() {
-      return dispatch((0, _campusesReducer.fetchCampuses)());
-    },
-    putStudent: function putStudent(updatedStudent, studentId) {
-      return dispatch((0, _studentsReducer.updateStudent)(updatedStudent, studentId));
-    }
-  };
-};
-
-SingleStudent.propTypes = {
-  classes: _propTypes2.default.object.isRequired
-};
-
-exports.default = (0, _core.withStyles)(styles)((0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(SingleStudent));
-
-/***/ }),
-
 /***/ "./app/screens/index.js":
 /*!******************************!*\
   !*** ./app/screens/index.js ***!
@@ -2869,39 +1821,21 @@ Object.defineProperty(exports, 'Home', {
   }
 });
 
-var _AllCampuses = __webpack_require__(/*! ./AllCampuses */ "./app/screens/AllCampuses.js");
+var _AllCalculations = __webpack_require__(/*! ./AllCalculations */ "./app/screens/AllCalculations.js");
 
-Object.defineProperty(exports, 'AllCampuses', {
+Object.defineProperty(exports, 'AllCalculations', {
   enumerable: true,
   get: function get() {
-    return _interopRequireDefault(_AllCampuses).default;
+    return _interopRequireDefault(_AllCalculations).default;
   }
 });
 
-var _SingleCampus = __webpack_require__(/*! ./SingleCampus */ "./app/screens/SingleCampus.js");
+var _SingleCalculation = __webpack_require__(/*! ./SingleCalculation */ "./app/screens/SingleCalculation.js");
 
-Object.defineProperty(exports, 'SingleCampus', {
+Object.defineProperty(exports, 'SingleCalculation', {
   enumerable: true,
   get: function get() {
-    return _interopRequireDefault(_SingleCampus).default;
-  }
-});
-
-var _AllStudents = __webpack_require__(/*! ./AllStudents */ "./app/screens/AllStudents.js");
-
-Object.defineProperty(exports, 'AllStudents', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_AllStudents).default;
-  }
-});
-
-var _SingleStudent = __webpack_require__(/*! ./SingleStudent */ "./app/screens/SingleStudent.js");
-
-Object.defineProperty(exports, 'SingleStudent', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_SingleStudent).default;
+    return _interopRequireDefault(_SingleCalculation).default;
   }
 });
 
@@ -39826,38 +38760,6 @@ var withWidth = function withWidth() {
 };
 
 var _default = withWidth;
-exports.default = _default;
-
-/***/ }),
-
-/***/ "./node_modules/@material-ui/icons/Add.js":
-/*!************************************************!*\
-  !*** ./node_modules/@material-ui/icons/Add.js ***!
-  \************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-
-var _createSvgIcon = _interopRequireDefault(__webpack_require__(/*! ./utils/createSvgIcon */ "./node_modules/@material-ui/icons/utils/createSvgIcon.js"));
-
-var _default = (0, _createSvgIcon.default)(_react.default.createElement(_react.default.Fragment, null, _react.default.createElement("path", {
-  d: "M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"
-}), _react.default.createElement("path", {
-  fill: "none",
-  d: "M0 0h24v24H0z"
-})), 'Add');
-
 exports.default = _default;
 
 /***/ }),
