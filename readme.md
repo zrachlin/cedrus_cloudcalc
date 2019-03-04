@@ -1,3 +1,10 @@
+To Run:
+
+- Required: NPM
+- git clone https://github.com/zrachlin/cedrus_cloudcalc
+- run npm install
+- run npm run start:dev
+
 Ideas:
 
 - calculation model:
