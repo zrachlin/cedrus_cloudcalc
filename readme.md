@@ -1,7 +1,9 @@
 To Run:
 
 - Required: NPM
+
   In Terminal:
+
 - run 'git clone https://github.com/zrachlin/cedrus_cloudcalc'
 - run 'npm install'
 - run 'npm run start:dev'
